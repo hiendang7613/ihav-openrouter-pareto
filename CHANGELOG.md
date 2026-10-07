@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — Unreleased
+## 0.1.0 — 2026-10-08
 
 - Add `init`, `fetch`, `ingest`, `build` and `diff` as one standard-library CLI with JSON output, and one `/ihav-openrouter-pareto` skill (`run | capture | build | diff`) for Claude Code and Codex.
 - Fetch OpenRouter's public catalog (`output_modalities=all`) and typed per-image prices from `/api/v1/images/models/<id>/endpoints` without a key; record each answer's URL, time and SHA-256 in the capture manifest.
