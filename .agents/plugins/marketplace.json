@@ -1,0 +1,12 @@
+{
+  "name": "ihav-openrouter-pareto",
+  "interface": {"displayName": "ihav-openrouter-pareto"},
+  "plugins": [
+    {
+      "name": "ihav-openrouter-pareto",
+      "source": {"source": "local", "path": "./plugins/ihav-openrouter-pareto"},
+      "policy": {"installation": "AVAILABLE"},
+      "category": "Productivity"
+    }
+  ]
+}

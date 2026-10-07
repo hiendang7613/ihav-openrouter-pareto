@@ -1,0 +1,651 @@
+000|deepseek/deepseek-v4.1-flash|31.6T|1.2s|80 t/s
+001|z-ai/glm-5.3-flash|10.6T|986ms|52 t/s
+002|xiaomi/mimo-v2.6-flash|10.3T|3.5s|17 t/s
+003|tencent/hy4-preview|6.81T|1.4s|20 t/s
+004|openai/gpt-6-luna|6.73T|2.5s|69 t/s
+005|deepseek/deepseek-v4-flash-0731|5.97T|926ms|28 t/s
+006|nvidia/nemotron-3-ultra-550b-a55b:free|5.96T|2.1s|24 t/s
+007|typesafe/jev-1.13|3.47T|172ms|—
+008|deepseek/deepseek-v4-flash|3.33T|571ms|95 t/s
+009|z-ai/glm-5.3|3.18T|879ms|133 t/s
+010|anthropic/claude-opus-5.5|3.14T|5.6s|48 t/s
+011|openai/gpt-5.6-luna|2.42T|3.3s|92 t/s
+012|google/gemini-3.8-flash|2.25T|2.9s|72 t/s
+013|openai/gpt-5.6-sol|1.94T|4.0s|53 t/s
+014|tencent/hy3|1.8T|2.0s|26 t/s
+015|moonshotai/kimi-k3|1.78T|1.6s|58 t/s
+016|z-ai/glm-5.2|1.53T|1.1s|29 t/s
+017|meta/muse-spark-1.3-contributor|1.45T|8.8s|43 t/s
+018|openai/gpt-6-astra|1.41T|1.9s|32 t/s
+019|anthropic/claude-sonnet-5.5|1.28T|2.5s|104 t/s
+020|xiaomi/mimo-v2.6-pro|1.27T|1.3s|30 t/s
+021|openai/gpt-6.1-sol|1.26T|4.3s|41 t/s
+022|minimax/minimax-m3|1.19T|910ms|37 t/s
+023|xiaomi/mimo-v2.5|1T|3.1s|41 t/s
+024|openai/gpt-6-sol|988B|3.3s|53 t/s
+025|poolside/laguna-s-2.1:free|924B|1.9s|39 t/s
+026|anthropic/claude-sonnet-5|904B|3.5s|74 t/s
+027|deepseek/deepseek-v4-pro-0813|881B|934ms|121 t/s
+028|anthropic/claude-opus-5|847B|4.1s|62 t/s
+029|google/gemini-3-flash-preview|799B|1.4s|89 t/s
+030|deepseek/deepseek-v4-pro|783B|931ms|91 t/s
+031|~deepseek/deepseek-flash-latest|727B|—|—
+032|openrouter/auto|680B|—|—
+033|nvidia/nemotron-3.5-lightning:free|673B|650ms|31 t/s
+034|openai/gpt-6-luna-pro|647B|8.3s|93 t/s
+035|google/gemini-2.5-flash-lite|645B|460ms|171 t/s
+036|upstage/solar-mini4|584B|2.2s|39 t/s
+037|openai/gpt-oss-120b|537B|420ms|34 t/s
+038|qwen/qwen3.8-27b|531B|681ms|41 t/s
+039|~deepseek/deepseek-v4-flash-latest|528B|—|—
+040|upstage/solar-pro4|524B|3.4s|41 t/s
+041|qwen/qwen3.8-flash|510B|1.7s|62 t/s
+042|google/gemini-3.1-flash-lite|508B|546ms|120 t/s
+043|nvidia/nemotron-3-super-120b-a12b:free|493B|908ms|77 t/s
+044|google/gemini-2.5-flash|493B|1.0s|78 t/s
+045|dots-studio/dots-3-note-preview:free|474B|1.7s|42 t/s
+046|google/gemini-3.7-flash|460B|2.4s|134 t/s
+047|google/gemma-4-31b-it|459B|618ms|31 t/s
+048|inclusionai/ling-3.0-flash-sante:free|445B|1.6s|78 t/s
+049|x-ai/grok-4.7|438B|1.7s|65 t/s
+050|deepseek/deepseek-v3.2|379B|1.3s|39 t/s
+051|qwen/qwen3.7-flash|374B|651ms|73 t/s
+052|google/gemma-4-26b-a4b-it|339B|1.2s|38 t/s
+053|inclusionai/ling-3.1-flash|339B|2.3s|70 t/s
+054|qwen/qwen3.8-max-0902|313B|6.1s|38 t/s
+055|anthropic/claude-fable-5.1|311B|7.5s|38 t/s
+056|anthropic/claude-sonnet-4.6|301B|1.0s|44 t/s
+057|openai/gpt-5.6-terra|288B|3.2s|76 t/s
+058|anthropic/claude-haiku-4.5|273B|801ms|91 t/s
+059|openai/gpt-oss-20b|253B|3.8s|22 t/s
+060|thinkingmachines/inkling:free|251B|1.9s|36 t/s
+061|google/gemini-3.5-flash-lite|251B|726ms|133 t/s
+062|mistralai/mistral-nemo|247B|562ms|20 t/s
+063|openai/gpt-4o-mini|243B|1.5s|46 t/s
+064|google/gemini-3.1-pro-preview|241B|2.7s|97 t/s
+065|z-ai/glm-5.3-flashx|234B|2.3s|76 t/s
+066|~z-ai/glm-flash-latest|225B|—|—
+067|meta/muse-spark-1.3|218B|16.2s|40 t/s
+068|openai/gpt-5-nano|216B|1.6s|59 t/s
+069|qwen/qwen3-embedding-8b|207B|1.0s|—
+070|anthropic/claude-opus-4.8|207B|1.3s|65 t/s
+071|~openai/gpt-luna-latest|196B|—|—
+072|stepfun/step-3.7-flash|193B|4.1s|54 t/s
+073|apodex/apodex-1.1-mini:free|179B|1.9s|90 t/s
+074|xiaomi/mimo-v2.5-pro|169B|1.7s|29 t/s
+075|openai/text-embedding-3-small|165B|294ms|—
+076|x-ai/grok-4.6|154B|1.7s|56 t/s
+077|openai/gpt-5.4-mini|147B|993ms|72 t/s
+078|moonshotai/kimi-k2.6|141B|1.2s|25 t/s
+079|openai/gpt-5.3-codex|136B|4.8s|51 t/s
+080|openai/gpt-5.6-luna-pro|135B|8.8s|121 t/s
+081|anthropic/claude-sonnet-4.5|134B|1.4s|37 t/s
+082|openai/gpt-5-mini|127B|6.0s|100 t/s
+083|cohere/north-mini-code:free|123B|1.4s|31 t/s
+084|inclusionai/ling-3.0-flash|123B|968ms|117 t/s
+085|thinkingmachines/inkling-small:free|119B|1.2s|109 t/s
+086|google/gemini-3.1-flash-lite-preview|114B|570ms|147 t/s
+087|~anthropic/claude-opus-latest|106B|—|—
+088|google/gemini-3.6-flash|101B|1.2s|102 t/s
+089|xiaomi/mimo-v2.6-pro-ultraspeed|101B|10.6s|45 t/s
+090|openai/gpt-5.4-nano|98.2B|1.9s|50 t/s
+091|anthropic/claude-opus-4.6|97B|2.3s|36 t/s
+092|openai/gpt-4.1-mini|95.1B|913ms|59 t/s
+093|google/gemini-3.5-flash|94.2B|1.7s|122 t/s
+094|voyageai/rerank-2.5-lite|92B|226ms|—
+095|~deepseek/deepseek-pro-latest|90.9B|—|—
+096|deepseek/deepseek-v4-flash-vision-exp|81.9B|1.3s|112 t/s
+097|poolside/laguna-xs-2.1:free|81B|543ms|65 t/s
+098|qwen/qwen3-235b-a22b-2507|78.1B|1.2s|49 t/s
+099|qwen/qwen3.7-plus|78B|1.1s|50 t/s
+100|minimax/minimax-m2.7|71.2B|1.7s|40 t/s
+101|~anthropic/claude-sonnet-latest|69.1B|—|—
+102|qwen/qwen3.5-flash-02-23|68.7B|588ms|81 t/s
+103|google/gemma-3-27b-it|67.1B|2.3s|14 t/s
+104|qwen/qwen3.8-2.4t-a95b|66.9B|4.4s|40 t/s
+105|google/gemini-2.5-pro|64.8B|3.3s|76 t/s
+106|qwen/qwen3.6-35b-a3b|64B|802ms|56 t/s
+107|openai/gpt-5.4|60.5B|2.0s|73 t/s
+108|x-ai/grok-4.5|57.9B|1.7s|50 t/s
+109|openai/gpt-4.1|56.1B|1.6s|56 t/s
+110|z-ai/glm-4.7|55.9B|794ms|39 t/s
+111|deepseek/deepseek-chat-v3.1|55.7B|757ms|8 t/s
+112|moonshotai/kimi-k2.7-code|53.8B|774ms|56 t/s
+113|z-ai/glm-5.3-prime|53B|1.7s|39 t/s
+114|~google/gemini-flash-latest|52.8B|—|—
+115|openai/gpt-5.5|49.9B|3.3s|53 t/s
+116|poolside/laguna-s-2.1|48.9B|492ms|85 t/s
+117|meta-llama/llama-3.1-8b-instruct|47.3B|731ms|24 t/s
+118|openrouter/auto-beta|46.7B|—|—
+119|~z-ai/glm-latest|44.6B|—|—
+120|openai/gpt-5.2|44.2B|4.5s|51 t/s
+121|moonshotai/kimi-k2.5|44.1B|1.5s|24 t/s
+122|inclusionai/ling-3.0-flash-vl|43B|920ms|138 t/s
+123|inception/mercury-2.5|42.3B|602ms|230 t/s
+124|z-ai/glm-5|42.2B|2.4s|49 t/s
+125|qwen/qwen3.5-397b-a17b|42.1B|1.2s|65 t/s
+126|meta-llama/llama-3.3-70b-instruct|42.1B|483ms|16 t/s
+127|baai/bge-m3|41.7B|546ms|—
+128|x-ai/grok-4.3|41.6B|1.5s|104 t/s
+129|openai/gpt-6.1-sol-pro|41.3B|4.4s|24 t/s
+130|qwen/qwen3-30b-a3b-instruct-2507|40.6B|1.0s|78 t/s
+131|~openai/gpt-sol-latest|38.6B|—|—
+132|anthropic/claude-opus-4.7|37.9B|1.5s|50 t/s
+133|anthropic/claude-fable-5|37.2B|3.6s|—
+134|qwen/qwen3.5-9b|35.4B|2.7s|28 t/s
+135|openai/gpt-6-luna:batch|33.6B|—|—
+136|qwen/qwen3-next-80b-a3b-instruct|33.5B|911ms|28 t/s
+137|x-ai/grok-4.20|33.3B|674ms|84 t/s
+138|openai/text-embedding-3-large|33.1B|710ms|—
+139|z-ai/glm-5.1|32.6B|1.8s|46 t/s
+140|mistralai/mistral-small-3.2-24b-instruct|32.3B|668ms|40 t/s
+141|meta/muse-glimmer-30b|31.2B|2.0s|36 t/s
+142|openai/gpt-5.1|30.5B|1.4s|76 t/s
+143|voyageai/rerank-2.5|30.2B|219ms|—
+144|nvidia/nemotron-3-ultra-550b-a55b|29.6B|2.7s|24 t/s
+145|qwen/qwen3-coder-next|29.1B|455ms|69 t/s
+146|qwen/qwen3.8-omni-flash|29.1B|5.2s|48 t/s
+147|deepseek/deepseek-chat-v3-0324|29B|1.9s|23 t/s
+148|nvidia/nemotron-3.5-lightning|27.7B|566ms|79 t/s
+149|openai/gpt-6-astra-pro|27.3B|7.8s|38 t/s
+150|nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free|27.1B|447ms|41 t/s
+151|openai/gpt-4.1-nano|24.5B|2.2s|44 t/s
+152|perplexity/pplx-embed-v1-0.6b|23.3B|89ms|—
+153|qwen/qwen3-vl-235b-a22b-instruct|23.1B|1.5s|11 t/s
+154|qwen/qwen3-vl-32b-instruct|22.7B|646ms|61 t/s
+155|qwen/qwen3.6-plus|22.7B|977ms|37 t/s
+156|z-ai/glm-4.6|22.4B|1.1s|48 t/s
+157|~moonshotai/kimi-latest|22B|—|—
+158|qwen/qwen3.8-max-prime|21.7B|1.6s|64 t/s
+159|amazon/nova-micro-v1|20.7B|523ms|186 t/s
+160|openai/gpt-5.6-sol-pro|20.5B|19.1s|120 t/s
+161|respan/span-01-lite|20.4B|617ms|—
+162|thinkingmachines/inkling|19.4B|729ms|69 t/s
+163|deepseek/deepseek-chat|19.3B|1.5s|37 t/s
+164|mistralai/mistral-large-4-0|18.4B|1.4s|68 t/s
+165|liquid/lfm-2.5-2.6b:free|18.2B|608ms|104 t/s
+166|~anthropic/claude-fable-latest|18B|—|—
+167|meta/muse-spark-1.2-contributor|17.7B|3.9s|117 t/s
+168|ibm-granite/granite-4.2-8b|16.9B|551ms|45 t/s
+169|qwen/qwen3.5-27b|16.3B|768ms|61 t/s
+170|qwen/qwen3.5-35b-a3b|16.2B|3.1s|53 t/s
+171|anthropic/claude-opus-4.5|15.1B|1.6s|35 t/s
+172|qwen/qwen3-32b|15B|311ms|33 t/s
+173|z-ai/glm-4.7-flash|14.5B|1.8s|21 t/s
+174|meta-llama/llama-4-maverick|14.4B|840ms|8 t/s
+175|minimax/minimax-m2.5|14.2B|1.6s|20 t/s
+176|qwen/qwen3.6-27b|14.2B|2.4s|29 t/s
+177|~x-ai/grok-latest|14.1B|—|—
+178|anthropic/claude-sonnet-4|14B|1.8s|—
+179|openai/gpt-4o|13.8B|1.1s|68 t/s
+180|qwen/qwen3-coder|13.7B|654ms|61 t/s
+181|mistralai/mistral-small-24b-instruct-2501|13.5B|357ms|38 t/s
+182|meta-llama/llama-4-scout|13.2B|660ms|29 t/s
+183|qwen/qwen3.7-max|13B|1.0s|77 t/s
+184|deepseek/deepseek-v3.2-exp|12.9B|3.0s|12 t/s
+185|qwen/qwen3.6-flash|12.6B|378ms|109 t/s
+186|openai/gpt-4o-mini-2024-07-18|12.6B|573ms|68 t/s
+187|qwen/qwen3-embedding-4b|12.4B|757ms|—
+188|deepseek/deepseek-r1-0528|12.3B|772ms|20 t/s
+189|nvidia/nemotron-3-super-120b-a12b|11.9B|1.4s|18 t/s
+190|google/gemma-3-12b-it|11.8B|843ms|46 t/s
+191|google/gemini-embedding-2|11.3B|1.2s|—
+192|z-ai/glm-4.5-air|11.2B|814ms|77 t/s
+193|meta/muse-spark-1.2|11.1B|4.2s|98 t/s
+194|openai/gpt-6-sol-pro|11B|7.3s|73 t/s
+195|qwen/qwen3.5-122b-a10b|11B|1.2s|46 t/s
+196|qwen/qwen3-reranker-8b|10.9B|398ms|—
+197|meituan/longcat-2.0|10.8B|1.7s|47 t/s
+198|mistralai/mistral-small-2603|10.7B|325ms|88 t/s
+199|openai/gpt-5|9.52B|5.8s|78 t/s
+200|voyageai/voyage-4-large|9.5B|279ms|—
+201|moonshotai/kimi-k2-0905|8.63B|943ms|44 t/s
+202|~openai/gpt-astra-latest|8.44B|—|—
+203|qwen/qwen3-vl-8b-instruct|8.29B|547ms|76 t/s
+204|qwen/qwen3-vl-30b-a3b-instruct|8.22B|643ms|68 t/s
+205|google/gemini-embedding-001|7.63B|471ms|—
+206|inception/mercury-decide:free|7.46B|380ms|—
+207|thinkingmachines/inkling-small|7.39B|3.1s|48 t/s
+208|voyageai/voyage-4-lite|7.25B|254ms|—
+209|voyageai/rerank-3-lite|7.17B|207ms|—
+210|qwen/qwen3-14b|7.15B|1.4s|68 t/s
+211|deepseek/deepseek-v3.1-terminus|6.87B|2.1s|18 t/s
+212|perplexity/pplx-decider-v1-27b|6.77B|964ms|—
+213|openai/gpt-5.6-terra-pro|6.59B|9.9s|62 t/s
+214|perceptron/perceptron-mk1|6.39B|830ms|28 t/s
+215|mistralai/mistral-medium-3-5|6.29B|810ms|109 t/s
+216|~anthropic/claude-haiku-latest|6.28B|—|—
+217|perplexity/pplx-embed-v1-4b|6.18B|66ms|—
+218|upstage/solar-decide|6.08B|17.1s|—
+219|unbiased/pareto-26.10-preview|6.02B|3.5s|47 t/s
+220|qwen/qwen3-coder-30b-a3b-instruct|6.01B|1.7s|54 t/s
+221|liquid/d1|5.89B|350ms|—
+222|mistralai/mistral-embed-2312|5.86B|644ms|—
+223|anthropic/claude-opus-5.5:batch|5.77B|—|—
+224|tencent/hy3-preview|5.7B|2.5s|80 t/s
+225|mistralai/ministral-8b-2512|5.69B|1.1s|77 t/s
+226|~google/gemini-pro-latest|5.45B|—|—
+227|voyageai/voyage-4|5.42B|197ms|—
+228|nvidia/nemotron-3-nano-30b-a3b|5.33B|306ms|235 t/s
+229|mistralai/mistral-medium-3.1|5.21B|568ms|76 t/s
+230|~openai/gpt-terra-latest|4.94B|—|—
+231|sao10k/l3-lunaris-8b|4.88B|549ms|44 t/s
+232|openai/gpt-5.6-luna:batch|4.86B|—|—
+233|google/gemini-2.5-flash-lite:batch|4.82B|—|—
+234|bytedance-seed/seed-2.0-lite|4.71B|1.3s|49 t/s
+235|qwen/qwen3-8b|4.62B|596ms|55 t/s
+236|bytedance-seed/seed-2.0-mini|4.5B|242ms|129 t/s
+237|voyageai/rerank-3|4.5B|268ms|—
+238|inclusionai/ling-3.0-flash-fin|4.44B|2.0s|79 t/s
+239|mistralai/devstral-2512|4.36B|1.4s|103 t/s
+240|fireworks/ember-1|4.24B|1.4s|61 t/s
+241|poolside/laguna-xs-2.1|4.18B|202ms|178 t/s
+242|google/gemini-3.6-flash:batch|4.12B|—|—
+243|cloudflare/clef-flash|4.11B|256ms|—
+244|google/gemini-embedding-2-preview|4.06B|258ms|—
+245|openai/gpt-image-2.5-sunburst|4.04B|29.0s|—
+246|qwen/qwen3.5-plus-02-15|3.87B|999ms|56 t/s
+247|x-ai/grok-build-0.1|3.75B|1.6s|117 t/s
+248|meta/muse-spark-1.1|3.75B|1.8s|148 t/s
+249|qwen/qwen-2.5-7b-instruct|3.7B|275ms|115 t/s
+250|mistralai/ministral-3b-2512|3.61B|307ms|155 t/s
+251|nex-agi/nex-n2.5-mini|3.52B|1.1s|139 t/s
+252|deepseek/deepseek-v4.1-flash:batch|3.5B|—|—
+253|google/gemini-3.1-flash-image|3.48B|18.1s|—
+254|openai/whisper-large-v3-turbo|—|945ms|—
+255|openai/gpt-6-luna-pro:batch|3.42B|—|—
+256|openai/o4-mini|3.41B|5.1s|132 t/s
+257|amazon/nova-lite-v1|3.35B|597ms|132 t/s
+258|aion-labs/aion-3.5|3.28B|1.6s|55 t/s
+259|qwen/qwen-2.5-72b-instruct|3.28B|575ms|24 t/s
+260|cloudflare/clef|3.12B|520ms|—
+261|z-ai/glm-5.3-flash:batch|2.93B|—|—
+262|perplexity/sonar|2.84B|1.6s|125 t/s
+263|openai/gpt-oss-safeguard-20b|2.83B|109ms|721 t/s
+264|bytedance-seed/seed-1.6-flash|2.77B|656ms|55 t/s
+265|google/gemini-3.7-flash:batch|2.75B|—|—
+266|nvidia/nemotron-3.5-content-safety:free|2.74B|345ms|66 t/s
+267|openai/gpt-6-sol:batch|2.74B|—|—
+268|microsoft/phi-4|2.71B|230ms|70 t/s
+269|z-ai/glm-5-turbo|2.71B|7.7s|23 t/s
+270|qwen/qwen3-coder-plus|2.64B|674ms|53 t/s
+271|inception/mercury-2|2.59B|368ms|317 t/s
+272|anthropic/claude-sonnet-5.5:batch|2.56B|—|—
+273|moonshotai/kimi-k2|2.56B|1.1s|44 t/s
+274|openai/gpt-6-luna-decisions|2.48B|219ms|—
+275|stepfun/step-3.5-flash|2.42B|1.2s|80 t/s
+276|moonshotai/kimi-k2-thinking|2.36B|368ms|202 t/s
+277|mistralai/ministral-14b-2512|2.36B|733ms|62 t/s
+278|togethercomputer/tev1-4b-experimental|2.28B|450ms|—
+279|bytedance-seed/seedream-4.5|2.24B|18.3s|—
+280|qwen/qwen3-30b-a3b|2.21B|851ms|67 t/s
+281|nvidia/llama-nemotron-rerank-vl-1b-v2:free|2.11B|538ms|—
+282|openai/gpt-chat-latest|2.09B|1.3s|66 t/s
+283|deepseek/deepseek-r1|2.08B|1.1s|21 t/s
+284|qwen/qwen3-235b-a22b|2.07B|2.3s|6 t/s
+285|aion-labs/aion-3.0|2.06B|1.4s|49 t/s
+286|amazon/nova-2-lite-v1|1.97B|830ms|119 t/s
+287|qwen/qwen2.5-vl-72b-instruct|1.96B|861ms|37 t/s
+288|google/gemini-3.1-flash-lite:batch|1.92B|—|—
+289|thedrummer/cydonia-24b-v4.1|1.91B|753ms|45 t/s
+290|z-ai/glm-4.5|1.89B|8.6s|32 t/s
+291|openai/gpt-4o-2024-08-06|1.87B|1.1s|97 t/s
+292|google/gemini-2.5-flash-image|1.84B|10.3s|—
+293|qwen/qwen3-coder-flash|1.77B|759ms|83 t/s
+294|unbiased/pareto|1.74B|3.1s|48 t/s
+295|google/gemini-3.1-flash-lite-image|1.66B|7.2s|—
+296|openai/text-embedding-ada-002|1.63B|223ms|—
+297|qwen/qwen3-max|1.61B|604ms|53 t/s
+298|sentence-transformers/all-minilm-l6-v2|1.61B|1.3s|—
+299|respan/span-01|1.61B|228ms|—
+300|jaredpalmer/kev-4b|1.6B|12.8s|—
+301|mistralai/mistral-large-2512|1.6B|740ms|60 t/s
+302|google/gemini-3.8-flash:batch|1.6B|—|—
+303|voyageai/voyage-multimodal-3.5|1.59B|314ms|—
+304|qwen/qwen3.5-plus-20260420|1.59B|1.4s|53 t/s
+305|z-ai/glm-5v-turbo|1.56B|2.5s|41 t/s
+306|qwen/qwen3-235b-a22b-thinking-2507|1.53B|854ms|49 t/s
+307|nvidia/nemotron-3-embed-1b:free|1.52B|267ms|—
+308|qwen/qwen-plus|1.5B|465ms|52 t/s
+309|openai/gpt-5.4-image-2|1.49B|42.3s|—
+310|microsoft/wizardlm-2-8x22b|1.48B|1.9s|15 t/s
+311|cognitivecomputations/dolphin-mistral-24b-venice-edition|1.4B|625ms|49 t/s
+312|microsoft/mai-transcribe-2|—|1.9s|—
+313|openai/gpt-image-2.5-flare|1.37B|12.8s|—
+314|openai/gpt-image-2|1.36B|21.0s|—
+315|openai/gpt-4o-2024-11-20|1.34B|1.0s|55 t/s
+316|nousresearch/hermes-3-llama-3.1-70b|1.31B|568ms|30 t/s
+317|bytedance-seed/seed-2-1-turbo|1.31B|861ms|44 t/s
+318|meta/muse-image|1.31B|19.9s|—
+319|meta-llama/llama-guard-4-12b|1.3B|312ms|—
+320|nex-agi/nex-n2.5-pro|1.3B|2.1s|37 t/s
+321|z-ai/glm-4.6v|1.26B|3.3s|24 t/s
+322|meta-llama/llama-3.1-70b-instruct|1.26B|377ms|38 t/s
+323|openai/whisper-large-v3|—|2.9s|—
+324|aion-labs/aion-2.0|1.25B|766ms|55 t/s
+325|google/gemini-3-pro-image|1.19B|24.6s|—
+326|cohere/command-a-plus|1.19B|247ms|124 t/s
+327|sakana/fugu-max|1.19B|3.6s|91 t/s
+328|google/gemini-embedding-2:batch|1.17B|—|—
+329|aion-labs/aion-3.5-mini|1.16B|1.7s|57 t/s
+330|intfloat/multilingual-e5-large|1.15B|1.1s|—
+331|perplexity/sonar-pro|1.14B|1.2s|135 t/s
+332|openai/gpt-5.1-codex-mini|1.12B|4.4s|70 t/s
+333|ibm-granite/granite-4.0-h-micro|1.11B|558ms|35 t/s
+334|x-ai/grok-4.20-multi-agent|1.07B|36.9s|277 t/s
+335|openai/gpt-5.2-codex|1.06B|2.9s|45 t/s
+336|inclusionai/ming-image-0.1-design|1.05B|30.0s|—
+337|google/gemini-3.1-flash-image-preview|1.04B|17.7s|—
+338|minimax/minimax-m2.1|1.02B|1.5s|47 t/s
+339|~openai/gpt-mini-latest|1.01B|—|—
+340|google/gemma-4-26b-a4b-it:free|949M|1.0s|37 t/s
+341|bytedance-seed/seedream-5-0-flash|924M|16.9s|—
+342|openai/gpt-5.1-codex|920M|3.8s|65 t/s
+343|minimax/minimax-m2-her|884M|685ms|48 t/s
+344|minimax/minimax-m2|872M|1.1s|85 t/s
+345|arcee-ai/trinity-large-thinking|848M|772ms|91 t/s
+346|perceptron/perceptron-mk1.5|827M|441ms|152 t/s
+347|openai/gpt-3.5-turbo|817M|503ms|79 t/s
+348|google/gemma-3-4b-it|796M|880ms|39 t/s
+349|voyageai/voyage-code-4|792M|204ms|—
+350|tencent/hy-mt2-30b-a3b|791M|750ms|57 t/s
+351|openai/o3-mini|777M|4.1s|156 t/s
+352|sakana/fugu-ultra-v2|768M|5.4s|70 t/s
+353|bytedance-seed/seedream-5-0-pro|758M|58.1s|—
+354|google/gemini-3-pro-image-preview|738M|21.1s|—
+355|nousresearch/hermes-4-405b|726M|354ms|38 t/s
+356|openai/gpt-oss-120b:batch|723M|—|—
+357|meta-llama/llama-3.2-3b-instruct|707M|462ms|266 t/s
+358|anthropic/claude-opus-4.1|687M|3.3s|15 t/s
+359|gryphe/mythomax-l2-13b|674M|425ms|95 t/s
+360|qwen/qwen3-30b-a3b-thinking-2507|671M|312ms|124 t/s
+361|nvidia/llama-nemotron-embed-vl-1b-v2:free|670M|427ms|—
+362|openai/gpt-5.6-sol:batch|669M|—|—
+363|aion-labs/aion-3.0-mini|656M|819ms|55 t/s
+364|baai/bge-base-en-v1.5|650M|1.2s|—
+365|black-forest-labs/flux.2-pro|644M|14.3s|—
+366|thedrummer/unslopnemo-12b|641M|507ms|34 t/s
+367|mistralai/codestral-embed-2505|635M|389ms|—
+368|mistralai/mistral-small-3.1-24b-instruct|613M|318ms|41 t/s
+369|mistralai/mistral-medium-3|611M|3.6s|133 t/s
+370|openai/o3|608M|2.6s|83 t/s
+371|google/gemini-3.1-pro-preview-customtools|594M|3.0s|59 t/s
+372|bytedance-seed/seedream-5-0-lite|585M|45.8s|—
+373|mistralai/codestral-2508|585M|236ms|106 t/s
+374|x-ai/grok-imagine-image-2.0|581M|12.5s|—
+375|nousresearch/hermes-3-llama-3.1-405b|577M|623ms|24 t/s
+376|black-forest-labs/flux.2-klein-4b|547M|4.7s|—
+377|openai/gpt-5.6-luna-pro:batch|539M|—|—
+378|sentence-transformers/all-mpnet-base-v2|511M|1.2s|—
+379|google/gemini-3.8-flash-tts|472M|3.2s|—
+380|google/gemma-4-31b-it:free|467M|1.3s|27 t/s
+381|qwen/qwen-plus-2025-07-28|457M|533ms|63 t/s
+382|qwen/qwen3-max-thinking|434M|1.0s|42 t/s
+383|bytedance-seed/seed-1.6|408M|1.7s|40 t/s
+384|openai/gpt-5-nano:batch|375M|—|—
+385|bytedance-seed/seed-2.0-code|373M|562ms|61 t/s
+386|openai/gpt-audio-mini|373M|567ms|123 t/s
+387|sao10k/l3.1-euryale-70b|341M|6.0s|19 t/s
+388|sao10k/l3.3-euryale-70b|322M|1.3s|17 t/s
+389|recraft/recraft-v4.1-flash|315M|1.9s|—
+390|x-ai/grok-imagine-image-quality|313M|5.1s|—
+391|sakana/fugu-ultra|298M|5.2s|10 t/s
+392|qwen/qwen3-vl-235b-a22b-thinking|280M|602ms|55 t/s
+393|openai/gpt-5.5-pro|269M|3.3s|15 t/s
+394|minimax/minimax-m1|263M|842ms|65 t/s
+395|baai/bge-large-en-v1.5|260M|326ms|—
+396|openai/gpt-5.6-terra:batch|252M|—|—
+397|openai/gpt-4o-mini-transcribe|324M|859ms|—
+398|anthracite-org/magnum-v4-72b|246M|882ms|16 t/s
+399|z-ai/glm-4.5v|245M|1.4s|53 t/s
+400|inference-net/schematron-v2-turbo|242M|1.2s|21 t/s
+401|perplexity/sonar-pro-search|240M|3.6s|28 t/s
+402|openai/gpt-6-astra:batch|240M|—|—
+403|openai/whisper-1|—|1.8s|—
+404|google/gemini-3.1-flash-tts-preview|237M|4.9s|—
+405|google/gemini-3.8-flash-lite-tts|223M|2.8s|—
+406|black-forest-labs/flux-3-image|222M|45.4s|—
+407|mistralai/mistral-large|219M|536ms|64 t/s
+408|openai/gpt-5-image-mini|216M|41.9s|—
+409|bytedance/ui-tars-1.5-7b|210M|1.3s|52 t/s
+410|meta-llama/llama-3.2-1b-instruct|207M|252ms|126 t/s
+411|thedrummer/skyfall-36b-v2|196M|301ms|68 t/s
+412|minimax/minimax-01|176M|1.1s|27 t/s
+413|cohere/command-r7b-12-2024|175M|165ms|66 t/s
+414|qwen/qwen3-next-80b-a3b-thinking|172M|—|—
+415|perplexity/sonar-reasoning-pro|170M|15.0s|28 t/s
+416|openai/gpt-5.1-codex-max|167M|4.6s|72 t/s
+417|google/lyria-3-pro-preview|166M|2.0s|15 t/s
+418|mistralai/voxtral-mini-transcribe|73.8M|440ms|—
+419|qwen/qwen3.6-max-preview|159M|1.0s|61 t/s
+420|inclusionai/ming-image-0.1-design-layer|151M|20.8s|—
+421|cohere/command-r-08-2024|148M|234ms|44 t/s
+422|x-ai/grok-stt-1.0|—|453ms|—
+423|mistralai/voxtral-small-24b-2507|138M|407ms|107 t/s
+424|upstage/solar-pro-3|138M|341ms|106 t/s
+425|amazon/nova-pro-v1|136M|655ms|—
+426|mistralai/ministral-8b-2512:batch|136M|—|—
+427|openai/o4-mini-high|135M|8.7s|122 t/s
+428|cohere/command-a|135M|386ms|37 t/s
+429|openai/gpt-audio|134M|591ms|92 t/s
+430|sentence-transformers/all-minilm-l12-v2|129M|22.1s|—
+431|baidu/ernie-4.5-vl-424b-a47b|129M|4.7s|26 t/s
+432|google/gemini-nano-banana-2.1|125M|15.4s|—
+433|inference-net/schematron-v2-small|121M|1.1s|195 t/s
+434|qwen/qwen3-vl-30b-a3b-thinking|120M|481ms|109 t/s
+435|openai/gpt-4o-2024-05-13|115M|2.1s|75 t/s
+436|qwen/qwen-image-3|114M|1m 3s|—
+437|liquid/lfm-2.5-embedding-350m:free|110M|531ms|—
+438|qwen/qwen-2.5-coder-32b-instruct|110M|1.7s|31 t/s
+439|respan/span-01-lite:free|108M|226ms|—
+440|black-forest-labs/flux.2-max|106M|29.3s|—
+441|openai/gpt-4|106M|830ms|57 t/s
+442|openai/gpt-5-image|103M|12.5s|—
+443|prism-ml/ternary-bonsai-2-27b|100M|1.1s|20 t/s
+444|thenlper/gte-base|99.8M|1.1s|—
+445|undi95/remm-slerp-l2-13b|99.6M|557ms|55 t/s
+446|tencent/hy-image-v3.5-preview|98.8M|36.2s|—
+447|mistralai/mistral-large-2407|97.6M|615ms|40 t/s
+448|krea/krea-2-medium-turbo|96.4M|8.7s|—
+449|qwen/qwen3-asr-1.7b|—|1.4s|—
+450|nvidia/parakeet-tdt-0.6b-v3|—|205ms|—
+451|z-ai/glm-5.3:batch|83.3M|—|—
+452|google/gemini-3.5-transcribe|178M|1.3s|—
+453|mistralai/mixtral-8x22b-instruct|80.6M|365ms|86 t/s
+454|perplexity/sonar-deep-research|80.5M|1m 8s|45 t/s
+455|anthropic/claude-opus-5:batch|80.4M|—|—
+456|openai/gpt-image-1-mini|77.7M|15.6s|—
+457|deepgram/nova-3|—|370ms|—
+458|google/gemini-3.5-flash-lite:batch|75.3M|—|—
+459|google/gemini-2.5-flash:batch|74.1M|—|—
+460|qwen/qwen3-vl-8b-thinking|72.5M|858ms|108 t/s
+461|x-ai/grok-4.3:batch|71.1M|—|—
+462|fish-audio/transcribe-1-pro|—|556ms|—
+463|qwen/qwen3-asr-0.6b|—|517ms|—
+464|openai/gpt-4-turbo|63.9M|1.3s|15 t/s
+465|microsoft/mai-image-2.6-flash|63M|15.0s|—
+466|openai/gpt-transcribe|—|686ms|—
+467|tencent/hy-mt2-7b|61.7M|1.0s|80 t/s
+468|qwen/qwen-image-3-pro|60.7M|1m 6s|—
+469|tencent/hy-mt2-1.8b|59.2M|457ms|235 t/s
+470|cohere/command-r-plus-08-2024|57.1M|298ms|18 t/s
+471|morph/morph-v3-fast|56M|230ms|3493 t/s
+472|recraft/recraft-v4.1|55.9M|10.4s|—
+473|writer/palmyra-x5|55.5M|305ms|58 t/s
+474|openai/gpt-oss-20b:batch|54.7M|—|—
+475|qwen/qwen3-asr-flash-2026-02-10|—|820ms|—
+476|openai/gpt-4o-transcribe|65M|1.1s|—
+477|openai/gpt-6-sol-pro:batch|49.3M|—|—
+478|openai/gpt-6-astra-pro:batch|48.3M|—|—
+479|anthropic/claude-fable-5.1:batch|46.7M|—|—
+480|openai/gpt-image-1|46.5M|41.7s|—
+481|nvidia/nemotron-3.5-content-safety|45.5M|188ms|216 t/s
+482|rekaai/reka-flash-3|45.1M|478ms|96 t/s
+483|sourceful/riverflow-v2.5-pro|43.1M|2m 14s|—
+484|black-forest-labs/flux.2-flex|40.6M|13.2s|—
+485|tencent/hunyuan-a13b-instruct|39.6M|798ms|40 t/s
+486|openai/gpt-3.5-turbo-0613|39.1M|967ms|42 t/s
+487|microsoft/mai-image-2.5|37.8M|24.7s|—
+488|google/gemma-2-27b-it|34.2M|361ms|51 t/s
+489|microsoft/mai-image-2.6|30.7M|25.3s|—
+490|sakana/sakana-namazu|28.6M|950ms|—
+491|nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b|—|1.5s|—
+492|intfloat/e5-base-v2|28.1M|754ms|—
+493|rekaai/reka-edge|27.6M|400ms|106 t/s
+494|hexgrad/kokoro-82m|27.6M|167ms|—
+495|google/gemini-3.1-pro-preview:batch|27.4M|—|—
+496|intfloat/e5-large-v2|27.4M|192ms|—
+497|openai/gpt-5.2-pro|27.3M|3.5s|11 t/s
+498|relace/relace-apply-3|26.2M|401ms|10062 t/s
+499|microsoft/mai-transcribe-1.5|—|1.1s|—
+500|sourceful/riverflow-v2.5-fast|23.5M|31.1s|—
+501|moonshotai/kimi-k3:batch|22.1M|—|—
+502|krea/krea-2-medium|21.8M|25.4s|—
+503|mistralai/mistral-saba|21.5M|340ms|40 t/s
+504|assemblyai/universal-3-5-pro|—|935ms|—
+505|mistralai/mistral-small-2603:batch|20.8M|—|—
+506|fish-audio/s2.1-pro-free:free|20.3M|421ms|—
+507|morph/morph-v3-large|18.8M|246ms|—
+508|openai/gpt-5.4-pro|18.7M|5.7s|—
+509|recraft/recraft-v4.1-vector|16.6M|8.7s|—
+510|aion-labs/aion-rp-llama-3.1-8b|16.2M|862ms|36 t/s
+511|meta/muse-voice-transcribe-1.0|—|1.3s|—
+512|openai/o1|14.4M|1.4s|94 t/s
+513|recraft/recraft-v4-styles|14.4M|—|—
+514|recraft/recraft-v4|13.1M|9.7s|—
+515|x-ai/grok-voice-tts-1.0|12.7M|261ms|—
+516|openai/o3-mini-high|12.5M|2.8s|113 t/s
+517|sourceful/riverflow-v2-fast|11.8M|34.2s|—
+518|mistralai/mistral-medium-3-5:batch|11.2M|—|—
+519|mistralai/mistral-large-2512:batch|9.88M|—|—
+520|krea/krea-2-large|9.77M|34.4s|—
+521|recraft/recraft-v4.1-utility|9.71M|6.8s|—
+522|google/lyria-3-clip-preview|9.61M|2.5s|11 t/s
+523|google/gemini-3-flash-preview:batch|9.45M|—|—
+524|openai/gpt-5-pro|9.32M|31.2s|9 t/s
+525|microsoft/mai-image-2.5-pro|8.84M|30.3s|—
+526|google/chirp-3|—|3.1s|—
+527|mancer/weaver|7.8M|494ms|74 t/s
+528|google/gemini-3.5-flash:batch|7.64M|—|—
+529|openai/gpt-3.5-turbo-16k|6.7M|870ms|56 t/s
+530|openai/o3-pro|6.65M|5.8s|25 t/s
+531|recraft/recraft-v4.1-pro-vector|6.11M|7.9s|—
+532|mistralai/voxtral-small-24b-2507-stt|—|1.6s|—
+533|fish-audio/s2.1-pro|5.63M|329ms|—
+534|sourceful/riverflow-v2-pro|4.82M|1m 39s|—
+535|thenlper/gte-large|4.71M|180ms|—
+536|mistralai/voxtral-mini-3b-2507|—|422ms|—
+537|relace/relace-search|4.05M|332ms|138 t/s
+538|google/gemini-2.5-pro:batch|3.63M|—|—
+539|recraft/recraft-v4.1-pro|3.58M|—|—
+540|fish-audio/transcribe-1|—|487ms|—
+541|recraft/recraft-v4-styles-pro|3.49M|—|—
+542|recraft/recraft-v3|3.39M|3.8s|—
+543|sentence-transformers/paraphrase-minilm-l6-v2|3.36M|651ms|—
+544|recraft/recraft-v4-vector|3.21M|—|—
+545|microsoft/mai-voice-2|2.79M|1.1s|—
+546|sentence-transformers/multi-qa-mpnet-base-dot-v1|2.62M|600ms|—
+547|recraft/recraft-v4-styles-vector|2.53M|17.8s|—
+548|microsoft/mai-voice-2.1-flash|2.29M|342ms|—
+549|qwen/qwen-audio-3.0-tts-plus|1.68M|622ms|—
+550|bytedance-seed/seed-audio-1-0|1.66M|18.5s|—
+551|microsoft/mai-voice-2.1|1.61M|1.4s|—
+552|recraft/recraft-v4-pro-vector|1.41M|—|—
+553|recraft/recraft-v4.1-utility-pro|1.39M|—|—
+554|deepgram/aura-2|1.26M|466ms|—
+555|recraft/recraft-v4-pro|1.14M|—|—
+556|microsoft/mai-voice-2-flash|1.05M|519ms|—
+557|minimax/speech-2.8-hd|1.02M|370ms|—
+558|recraft/recraft-v4-styles-pro-vector|994K|—|—
+559|mistralai/voxtral-mini-tts-2603|987K|476ms|—
+560|openai/o1-pro|776K|10.8s|5 t/s
+561|qwen/qwen-audio-3.0-tts-flash|645K|436ms|—
+562|minimax/speech-2.8-turbo|587K|568ms|—
+563|openai/gpt-5.6-sol-pro:batch|247K|—|—
+564|openai/gpt-5.6-terra-pro:batch|222K|—|—
+565|deepgram/flux-tts|159K|705ms|—
+566|fish-audio/s2-pro|118K|166ms|—
+567|canopylabs/orpheus-3b-0.1-ft|106K|11.5s|—
+568|fish-audio/s1|40K|264ms|—
+569|sesame/csm-1b|37K|21.8s|—
+570|anthropic/claude-sonnet-5:batch|22K|—|—
+571|openai/gpt-5-pro:batch|842|—|—
+572|openai/o3-mini:batch|609|—|—
+573|openai/o4-mini:batch|469|—|—
+574|openai/gpt-5:batch|446|—|—
+575|openai/gpt-5-mini:batch|397|—|—
+576|openai/o3:batch|345|—|—
+577|openai/gpt-5.4-pro:batch|203|—|—
+578|openai/gpt-5.2:batch|199|—|—
+579|openai/gpt-5.5-pro:batch|191|—|—
+580|openai/gpt-5.1:batch|189|—|—
+581|openai/gpt-5.5:batch|165|—|—
+582|openai/gpt-4.1-nano:batch|152|—|—
+583|openai/gpt-5.2-pro:batch|144|—|—
+584|openai/gpt-4.1:batch|134|—|—
+585|openai/gpt-5.4-nano:batch|133|—|—
+586|openai/gpt-4.1-mini:batch|133|—|—
+587|openai/gpt-4o:batch|128|—|—
+588|openai/gpt-5.4-mini:batch|116|—|—
+589|openai/gpt-4o-mini:batch|115|—|—
+590|openai/gpt-5.4:batch|75|—|—
+591|openai/gpt-4-turbo:batch|72|—|—
+592|openai/gpt-3.5-turbo:batch|54|—|—
+593|mistralai/codestral-2508:batch|10|—|—
+594|heygen/heygen-video-1|—|14.2s|—
+595|google/veo-3.1-lite|—|58.3s|—
+596|bytedance/seedance-2.5|—|3m 40s|—
+597|alibaba/wan-3.0|—|2m 52s|—
+598|bytedance/seedance-2.0|—|3m 22s|—
+599|bytedance/seedance-2.0-fast|—|2m 6s|—
+600|google/veo-3.1-fast|—|52.7s|—
+601|bytedance/seedance-2.0-mini|—|1m 57s|—
+602|minimax/hailuo-3-max|—|15.5s|—
+603|kwaivgi/kling-v3.0-std|—|1m 56s|—
+604|kwaivgi/kling-v3.0-pro|—|3m 10s|—
+605|heygen/avatar-iv|—|1m 7s|—
+606|bytedance/seedance-1-5-pro|—|51.9s|—
+607|minimax/hailuo-3|—|5m 18s|—
+608|x-ai/grok-imagine-video|—|22.8s|—
+609|google/veo-3.1|—|1m 44s|—
+610|x-ai/grok-imagine-video-1.5|—|32.9s|—
+611|alibaba/happyhorse-1.1|—|1m 45s|—
+612|alibaba/wan-2.7|—|1m 3s|—
+613|alibaba/wan-3.0-prime|—|1m 46s|—
+614|black-forest-labs/flux-3-video|—|—|—
+615|x-ai/grok-imagine-video-1.5-lite|—|23.2s|—
+616|black-forest-labs/flux-video-edit|—|48.2s|—
+617|kwaivgi/kling-video-o1|—|—|—
+618|alibaba/wan-2.6|—|1m 3s|—
+619|runway/aleph-2|—|2m 49s|—
+620|runway/gen-4.5|—|—|—
+621|minimax/hailuo-2.3|—|—|—
+622|alibaba/happyhorse-1.0|—|2m 23s|—
+623|typesafe/jev-router|—|—|—
+624|nvidia/switchyard|—|—|—
+625|~typesafe/jev-latest|—|—|—
+626|black-forest-labs/flux-video-upscale|—|—|—
+627|openrouter/fusion|—|—|—
+628|anthropic/claude-fable-5:batch|—|—|—
+629|anthropic/claude-opus-4.8:batch|—|—|—
+630|openrouter/pareto-code|—|—|—
+631|anthropic/claude-opus-4.7:batch|—|—|—
+632|cohere/rerank-4-pro|—|557ms|—
+633|cohere/rerank-4-fast|—|326ms|—
+634|cohere/rerank-v3.5|—|307ms|—
+635|anthropic/claude-sonnet-4.6:batch|—|—|—
+636|anthropic/claude-opus-4.6:batch|—|—|—
+637|openrouter/free|—|—|—
+638|openai/gpt-5.2-chat|—|—|—
+639|openrouter/bodybuilder|—|—|—
+640|anthropic/claude-opus-4.5:batch|—|—|—
+641|amazon/nova-premier-v1|—|—|—
+642|openai/text-embedding-ada-002:batch|—|—|—
+643|openai/text-embedding-3-large:batch|—|—|—
+644|openai/text-embedding-3-small:batch|—|—|—
+645|anthropic/claude-haiku-4.5:batch|—|—|—
+646|anthropic/claude-sonnet-4.5:batch|—|—|—
+647|mistralai/mistral-medium-3.1:batch|—|—|—
+648|anthropic/claude-opus-4.1:batch|—|—|—
+649|google/gemini-2.5-pro-preview|—|—|—
+650|openai/gpt-3.5-turbo-instruct|—|—|—

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-marketplace.json",
+  "name": "ihav-openrouter-pareto",
+  "description": "OpenRouter quality or usage vs price charts with Pareto frontiers for Claude Code and Codex.",
+  "owner": {"name": "hiendang7613"},
+  "plugins": [
+    {
+      "name": "ihav-openrouter-pareto",
+      "source": "./plugins/ihav-openrouter-pareto",
+      "category": "productivity",
+      "description": "One offline HTML per capture: OpenRouter text, image and speech models plotted as quality or weekly usage vs list price, with a Pareto frontier, CSV and JSON."
+    }
+  ]
+}

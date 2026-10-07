@@ -1,0 +1,34 @@
+---
+name: ihav-openrouter-pareto
+description: Charts OpenRouter models as quality or weekly usage versus list price with a Pareto frontier, one tab per output modality (text, image, speech), from OpenRouter's public catalog and its models Table. Use when someone asks which OpenRouter model gives the best quality or usage for its price, wants an artificialanalysis-style price chart of OpenRouter models, or wants to compare two OpenRouter captures.
+argument-hint: run | capture | build [capture_id] | diff <capture_a> <capture_b>
+allowed-tools: Bash(python3 ${CLAUDE_PLUGIN_ROOT}/core/ihav-openrouter-pareto/scripts/pareto.py *)
+---
+
+# ihav-openrouter-pareto
+
+Run the bundled command from the user's project folder. Use `python3` on macOS/Linux or `py -3` on Windows. Every command prints one JSON object; state lives in `./.ihav_space/ihav-openrouter-pareto/`.
+
+```bash
+python3 "${CLAUDE_PLUGIN_ROOT}/core/ihav-openrouter-pareto/scripts/pareto.py" <command> --project .
+```
+
+`$ARGUMENTS` selects the subcommand; empty means `run`.
+
+- `run`: `init`, then `fetch`, then the Table step for each modality in `config.json`, then `build`. Give the user the `html` path from the build result and open it if they ask.
+- `capture`: `init`, `fetch` and the Table step, without `build`.
+- `build [capture_id]`: `build --capture <capture_id>`, or the newest capture when no id is given.
+- `diff <a> <b>`: `diff <a> <b>` with two capture ids, or dates that name exactly one capture each. Items under `not_comparable` have a different metric identity or price basis; never compare them.
+
+## Table step
+
+This skill owns the browser step; follow [table capture](../../../core/ihav-openrouter-pareto/references/table-capture.md). If no browser tool is available, skip it, run `build` anyway and say: "Table step skipped: no browser tool, so Weekly Tokens, Latency and Throughput are unavailable." The build then marks those columns `unavailable` and keeps the API-only views.
+
+## Rules
+
+- Never guess a price, score, unit or model match. Report what the JSON returns.
+- Announce `latest` only when `build` returns `"validated": true`. Otherwise quote its `problems` and say that `latest` stayed where it was.
+- Weekly tokens measure usage, not quality. Call the image and speech default charts "Weekly usage vs price".
+- A "from" price is a lower bound. Prices are list prices, not the cost of a task, and units are never converted.
+- Keep a missing host capability (no browser tool) separate from a parser or data error when you report.
+- Use only the public, key-free GETs that `fetch` makes. No API key, cookie, login or paid call. If a command reports HTTP 401, 403, 429 or a network error, report the message as returned and stop; do not retry through another route.

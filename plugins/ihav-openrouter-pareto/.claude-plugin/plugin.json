@@ -1,0 +1,12 @@
+{
+  "name": "ihav-openrouter-pareto",
+  "displayName": "ihav-openrouter-pareto",
+  "version": "0.1.0",
+  "description": "OpenRouter models as quality or weekly usage vs list price, one Pareto chart per output modality, from public catalog data and the models Table.",
+  "author": {"name": "hiendang7613"},
+  "license": "MIT",
+  "keywords": ["openrouter", "pareto", "llm-pricing", "claude-code", "codex"],
+  "homepage": "https://github.com/hiendang7613/ihav-openrouter-pareto",
+  "repository": "https://github.com/hiendang7613/ihav-openrouter-pareto",
+  "skills": "./claude/skills"
+}

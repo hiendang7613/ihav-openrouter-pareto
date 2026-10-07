@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>__TITLE__</title>
+<style>__STYLE__</style>
+</head>
+<body>
+<header>
+  <h1>OpenRouter: quality or usage vs price</h1>
+  <p id="meta"></p>
+  <ul id="alerts"></ul>
+</header>
+<nav id="tabs" role="tablist" aria-label="Output modality"></nav>
+<main>
+  <section id="controls" aria-label="View">
+    <label>Metric <select id="metric"></select></label>
+    <label>Price <select id="basis"></select></label>
+    <label>Offers <select id="scope"></select></label>
+  </section>
+  <h2 id="title"></h2>
+  <p id="counts"></p>
+  <ul id="notes"></ul>
+  <div id="chart-wrap">
+    <svg id="chart" role="img" aria-labelledby="title" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="tip" role="tooltip" hidden></div>
+  </div>
+  <ul id="legend">
+    <li><span class="sym circle"></span>exact price</li>
+    <li><span class="sym diamond"></span>"from" price, a lower bound</li>
+    <li><span class="sym square"></span>free offer (every price 0)</li>
+    <li><span class="sym hollow"></span>this price is 0 in a paid offer</li>
+    <li><span class="sym v-standard"></span>standard <span class="sym v-batch"></span>batch <span class="sym v-free"></span>:free</li>
+    <li><span class="sym line"></span>Pareto step: best score observed at a price up to that point</li>
+  </ul>
+  <div class="table-wrap">
+    <table id="points">
+      <thead><tr><th>#</th><th>Model</th><th>Offer</th><th>Price</th><th>Score</th><th>Pareto</th><th>Price source</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <details id="excluded"><summary>Routers and aliases in this tab</summary><ul></ul></details>
+</main>
+<footer><ul id="global-notes"></ul></footer>
+<script id="report-data" type="application/json">__DATA__</script>
+<script>__SCRIPT__</script>
+</body>
+</html>

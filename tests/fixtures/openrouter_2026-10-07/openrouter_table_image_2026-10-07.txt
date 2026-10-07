@@ -1,0 +1,62 @@
+# OpenRouter https://openrouter.ai/models?order=top-weekly&output_modalities=image, Table view, captured 2026-10-07 14:00 (ICT) through Chrome console relay by CLAUDE_01; 59 rows = the count the modality tab showed.
+# Columns: slug|Model Name|Weekly Tokens|Input|Output|Context|Latency|Throughput|Intelligence|Coding|Agentic|DA ELO|Code Categories|UI Component|Game Development|Data Visualization|3D|Image|Video|SVG|Released|(empty)
+# A cell ending in {2} spans Input and Output (one price), so the later columns of that row shift left by one.
+openai/gpt-image-2.5-sunburst|OpenAI: GPT Image 2.5 Sunburst|4.03B|$8|$30|400,000|29.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|4w ago|
+google/gemini-3.1-flash-image|Google: Nano Banana 2 (Gemini 3.1 Flash Image)|3.47B|$0.50|$60|131,072|17.6s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+bytedance-seed/seedream-4.5|ByteDance Seed: Seedream 4.5|2.24B|from $0.04{2}|4,096|15.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|9mo ago|
+google/gemini-2.5-flash-image|Google: Nano Banana (Gemini 2.5 Flash Image)|1.84B|$0.30|$30|32,768|8.4s|—|—|—|—|—|—|—|—|—|—|1,187|—|—|12mo ago|
+google/gemini-3.1-flash-lite-image|Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)|1.66B|$0.25|$30|65,536|7.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+openai/gpt-5.4-image-2|OpenAI: GPT-5.4 Image 2|1.49B|$8|$30|272,000|41.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+openai/gpt-image-2.5-flare|OpenAI: GPT Image 2.5 Flare|1.37B|$8|$30|400,000|12.8s|—|—|—|—|—|—|—|—|—|—|—|—|—|4w ago|
+openai/gpt-image-2|OpenAI: GPT Image 2|1.35B|$8|$30|400,000|23.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+meta/muse-image|Meta: Muse Image|1.3B|$0.01{2}|65,536|19.9s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+google/gemini-3-pro-image|Google: Nano Banana Pro (Gemini 3 Pro Image)|1.19B|$2|$120|131,072|27.3s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+inclusionai/ming-image-0.1-design|inclusionAI: Ming Image 0.1 Design|1.04B|$0|$0|—|29.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|2w ago|
+google/gemini-3.1-flash-image-preview|Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)|1.04B|$0.50|$60|65,536|17.1s|—|—|—|—|—|—|—|—|—|—|1,277|—|—|7mo ago|
+bytedance-seed/seedream-5-0-flash|ByteDance Seed: Seedream 5.0 Flash|922M|from $0.018{2}|—|16.8s|—|—|—|—|—|—|—|—|—|—|—|—|—|5d ago|
+bytedance-seed/seedream-5-0-pro|ByteDance Seed: Seedream 5.0 Pro|757M|from $0.045{2}|—|56.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+google/gemini-3-pro-image-preview|Google: Nano Banana Pro (Gemini 3 Pro Image Preview)|736M|$2|$120|65,536|21.7s|—|—|—|—|—|—|—|—|—|—|1,244|—|—|10mo ago|
+black-forest-labs/flux.2-pro|Black Forest Labs: FLUX.2 Pro|639M|$0.03{2}|46,864|11.9s|—|—|—|—|—|—|—|—|—|—|1,196|—|—|10mo ago|
+bytedance-seed/seedream-5-0-lite|ByteDance Seed: Seedream 5.0 Lite|584M|from $0.035{2}|—|46.8s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+x-ai/grok-imagine-image-2.0|xAI: Grok Imagine Image 2.0|580M|from $0.04{2}|65,536|13.9s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+black-forest-labs/flux.2-klein-4b|Black Forest Labs: FLUX.2 Klein 4B|546M|$0.014{2}|40,960|4.3s|—|—|—|—|—|—|—|—|—|—|1,064|—|—|8mo ago|
+recraft/recraft-v4.1-flash|Recraft: Recraft V4.1 Flash|315M|$0.007{2}|65,536|2.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|1w ago|
+x-ai/grok-imagine-image-quality|SpaceXAI: Grok Imagine Image Quality|312M|from $0.05{2}|65,536|7.3s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+black-forest-labs/flux-3-image|Black Forest Labs: FLUX.3 Image 50% off|221M|from $0.0205{2}|46,864|46.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|5d ago|
+openai/gpt-5-image-mini|OpenAI: GPT-5 Image Mini|216M|$2.50|$8|400,000|45.0s|—|—|—|—|—|—|—|—|—|—|1,184|—|—|11mo ago|
+inclusionai/ming-image-0.1-design-layer|inclusionAI: Ming Image 0.1 Design Layer|151M|$0|$0|—|26.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|1w ago|
+google/gemini-nano-banana-2.1|Google: Nano Banana 2.1|120M|$1.50|$30|65,536|15.9s|—|—|—|—|—|—|—|—|—|—|—|—|—|0d ago|
+qwen/qwen-image-3|Qwen: Qwen Image 3|114M|from $0.03{2}|65,536|51.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+black-forest-labs/flux.2-max|Black Forest Labs: FLUX.2 Max|106M|$0.07{2}|46,864|29.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|9mo ago|
+openai/gpt-5-image|OpenAI: GPT-5 Image|103M|$10|$40|400,000|12.0s|—|—|—|—|—|—|—|—|—|—|1,192|—|—|11mo ago|
+tencent/hy-image-v3.5-preview|Tencent: Hy Image 3.5 Preview|98.2M|$1.60{2}|100,000|28.5s|—|—|—|—|—|—|—|—|—|—|—|—|—|1d ago|
+krea/krea-2-medium-turbo|Krea: Krea 2 Medium Turbo|96.3M|from $0.015{2}|65,536|8.3s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+openai/gpt-image-1-mini|OpenAI: GPT Image 1 Mini|77.6M|$2.50|$8|400,000|13.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+microsoft/mai-image-2.6-flash|Microsoft AI: MAI-Image-2.6 Flash|63M|$2.50|$19|4,096|15.2s|—|—|—|—|—|—|—|—|—|—|1,307|—|—|1mo ago|
+qwen/qwen-image-3-pro|Qwen: Qwen Image 3 Pro|60.3M|from $0.04{2}|65,536|1m 3s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+recraft/recraft-v4.1|Recraft: Recraft V4.1|55.9M|$0.035{2}|65,536|6.6s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+openai/gpt-image-1|OpenAI: GPT Image 1|46.4M|$10|$40|400,000|42.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|3mo ago|
+sourceful/riverflow-v2.5-pro|Sourceful: Riverflow V2.5 Pro|43.1M|from $0.13{2}|32,768|2m 15s|—|—|—|—|—|—|—|—|—|—|1,367|—|—|4mo ago|
+black-forest-labs/flux.2-flex|Black Forest Labs: FLUX.2 Flex|40.6M|from $0.06{2}|67,344|15.3s|—|—|—|—|—|—|—|—|—|—|1,201|—|—|10mo ago|
+microsoft/mai-image-2.5|Microsoft AI: MAI-Image-2.5|37.1M|$8|$47|4,096|23.4s|—|—|—|—|—|—|—|—|—|—|1,226|—|—|4mo ago|
+microsoft/mai-image-2.6|Microsoft AI: MAI-Image-2.6|30.7M|$8|$38|4,096|24.8s|—|—|—|—|—|—|—|—|—|—|1,319|—|—|1mo ago|
+sourceful/riverflow-v2.5-fast|Sourceful: Riverflow V2.5 Fast|23.5M|from $0.019{2}|32,768|25.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+krea/krea-2-medium|Krea: Krea 2 Medium|21.7M|from $0.03{2}|65,536|21.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+recraft/recraft-v4.1-vector|Recraft: Recraft V4.1 Vector|16.5M|$0.08{2}|65,536|9.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+recraft/recraft-v4-styles|Recraft: Recraft V4 Styles|14.4M|from $0.035{2}|65,536|—|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+recraft/recraft-v4|Recraft: Recraft V4|13.1M|$0.04{2}|65,536|9.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+sourceful/riverflow-v2-fast|Sourceful: Riverflow V2 Fast|11.8M|from $0.02{2}|8,192|29.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|8mo ago|
+krea/krea-2-large|Krea: Krea 2 Large|9.76M|from $0.06{2}|65,536|59.2s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+recraft/recraft-v4.1-utility|Recraft: Recraft V4.1 Utility|9.7M|$0.035{2}|65,536|12.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+microsoft/mai-image-2.5-pro|Microsoft AI: MAI-Image-2.5 Pro|8.78M|$8|$108|4,096|28.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+recraft/recraft-v4.1-pro-vector|Recraft: Recraft V4.1 Pro Vector|6.11M|$0.30{2}|65,536|7.9s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+sourceful/riverflow-v2-pro|Sourceful: Riverflow V2 Pro|4.81M|from $0.15{2}|8,192|—|—|—|—|—|—|—|—|—|—|—|—|—|—|8mo ago|
+recraft/recraft-v4.1-pro|Recraft: Recraft V4.1 Pro|3.58M|$0.21{2}|65,536|14.2s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+recraft/recraft-v4-styles-pro|Recraft: Recraft V4 Styles Pro|3.49M|from $0.10{2}|65,536|22.8s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+recraft/recraft-v3|Recraft: Recraft V3|3.39M|$0.04{2}|65,536|—|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+recraft/recraft-v4-vector|Recraft: Recraft V4 Vector|3.21M|$0.08{2}|65,536|—|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+recraft/recraft-v4-styles-vector|Recraft: Recraft V4 Styles Vector|2.52M|from $0.05{2}|65,536|—|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+recraft/recraft-v4-pro-vector|Recraft: Recraft V4 Pro Vector|1.41M|$0.30{2}|65,536|—|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+recraft/recraft-v4.1-utility-pro|Recraft: Recraft V4.1 Utility Pro|1.39M|$0.21{2}|65,536|13.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+recraft/recraft-v4-pro|Recraft: Recraft V4 Pro|1.14M|$0.25{2}|65,536|17.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+recraft/recraft-v4-styles-pro-vector|Recraft: Recraft V4 Styles Pro Vector|994K|from $0.12{2}|65,536|29.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|

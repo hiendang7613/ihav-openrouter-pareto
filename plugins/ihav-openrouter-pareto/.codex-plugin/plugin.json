@@ -1,0 +1,25 @@
+{
+  "name": "ihav-openrouter-pareto",
+  "version": "0.1.0",
+  "description": "OpenRouter models as quality or weekly usage vs list price, one Pareto chart per output modality, from public catalog data and the models Table.",
+  "author": {"name": "hiendang7613"},
+  "license": "MIT",
+  "keywords": ["openrouter", "pareto", "llm-pricing", "claude-code", "codex"],
+  "skills": "./core/",
+  "interface": {
+    "displayName": "ihav-openrouter-pareto",
+    "shortDescription": "OpenRouter quality or usage vs price, with Pareto frontiers",
+    "longDescription": "Fetch OpenRouter's public model catalog and typed per-image prices without a key, read the models Table in a browser when one is available, and build one offline HTML page with a tab per output modality (text, image, speech): a chart of a chosen metric against one price component and unit, the Pareto step line, hover details and a table, plus CSV and JSON. Weekly tokens measure usage, not quality. Prices are list prices; units are never converted.",
+    "developerName": "hiendang7613",
+    "category": "Productivity",
+    "capabilities": ["Interactive"],
+    "defaultPrompt": [
+      "Which OpenRouter text models give the best intelligence for their input price?",
+      "Build the OpenRouter Pareto charts for text, image and speech.",
+      "What changed on OpenRouter between my last two captures?"
+    ],
+    "websiteURL": "https://github.com/hiendang7613/ihav-openrouter-pareto"
+  },
+  "homepage": "https://github.com/hiendang7613/ihav-openrouter-pareto",
+  "repository": "https://github.com/hiendang7613/ihav-openrouter-pareto"
+}

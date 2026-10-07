@@ -1,0 +1,11 @@
+[project]
+name = "ihav-openrouter-pareto"
+version = "0.1.0"
+description = "OpenRouter quality or usage vs list price, with Pareto frontiers, as one offline HTML page plus CSV and JSON"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "hiendang7613"}]
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

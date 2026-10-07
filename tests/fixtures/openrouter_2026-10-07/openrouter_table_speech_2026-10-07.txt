@@ -1,0 +1,26 @@
+# OpenRouter https://openrouter.ai/models?order=top-weekly&output_modalities=speech, Table view, captured 2026-10-07 13:54 (ICT) through Chrome console relay by CLAUDE_01; 23 rows = the count the modality tab showed.
+# Columns: slug|Model Name|Weekly Tokens|Input|Output|Context|Latency|Throughput|Intelligence|Coding|Agentic|DA ELO|Code Categories|UI Component|Game Development|Data Visualization|3D|Image|Video|SVG|Released|(empty)
+# A cell ending in {2} spans Input and Output (one price), so the later columns of that row shift left by one.
+google/gemini-3.8-flash-tts|Google: Gemini 3.8 Flash TTS|471M|$0.50|$9|32,768|3.0s|—|—|—|—|—|—|—|—|—|—|—|—|—|1w ago|
+google/gemini-3.1-flash-tts-preview|Google: Gemini 3.1 Flash TTS Preview|237M|$1|$20|32,768|5.1s|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+google/gemini-3.8-flash-lite-tts|Google: Gemini 3.8 Flash Lite TTS|223M|$0.50|$6|32,768|2.6s|—|—|—|—|—|—|—|—|—|—|—|—|—|1w ago|
+hexgrad/kokoro-82m|hexgrad: Kokoro 82M|27.5M|$0.62{2}|4,096|163ms|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+fish-audio/s2.1-pro-free:free|Fish Audio: S2.1 Pro Free (free)|20.3M|$0|$0|—|350ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+x-ai/grok-voice-tts-1.0|SpaceXAI: Grok Voice TTS 1.0|12.7M|$15{2}|15,000|194ms|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+fish-audio/s2.1-pro|Fish Audio: S2.1 Pro|5.62M|$15{2}|—|261ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+microsoft/mai-voice-2|Microsoft AI: MAI-Voice-2|2.79M|$22{2}|—|976ms|—|—|—|—|—|—|—|—|—|—|—|—|—|4mo ago|
+microsoft/mai-voice-2.1-flash|Microsoft AI: MAI-Voice-2.1-Flash|2.26M|$15{2}|—|344ms|—|—|—|—|—|—|—|—|—|—|—|—|—|5d ago|
+qwen/qwen-audio-3.0-tts-plus|Qwen: Qwen-Audio-3.0-TTS Plus|1.67M|$20{2}|—|876ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+bytedance-seed/seed-audio-1-0|ByteDance Seed: Seed Audio 1.0|1.66M|$0.15{2}|—|21.7s|—|—|—|—|—|—|—|—|—|—|—|—|—|1w ago|
+microsoft/mai-voice-2.1|Microsoft AI: MAI-Voice-2.1|1.59M|$22{2}|—|1.4s|—|—|—|—|—|—|—|—|—|—|—|—|—|5d ago|
+deepgram/aura-2|Deepgram: Aura-2|1.26M|$30{2}|—|300ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+microsoft/mai-voice-2-flash|Microsoft AI: MAI-Voice-2-Flash|1.05M|$15{2}|—|666ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+minimax/speech-2.8-hd|MiniMax: Speech 2.8 HD|1.02M|$100{2}|—|369ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+mistralai/voxtral-mini-tts-2603|Mistral: Voxtral Mini TTS|984K|$16{2}|4,096|469ms|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+qwen/qwen-audio-3.0-tts-flash|Qwen: Qwen-Audio-3.0-TTS Flash|645K|$15{2}|—|346ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+minimax/speech-2.8-turbo|MiniMax: Speech 2.8 Turbo|587K|$60{2}|—|631ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+deepgram/flux-tts|Deepgram: Flux TTS|159K|$45{2}|—|705ms|—|—|—|—|—|—|—|—|—|—|—|—|—|1mo ago|
+fish-audio/s2-pro|Fish Audio: S2 Pro|118K|$15{2}|—|286ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+canopylabs/orpheus-3b-0.1-ft|Canopy Labs: Orpheus 3B|104K|$7{2}|4,096|12.3s|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
+fish-audio/s1|Fish Audio: S1|40K|$15{2}|—|270ms|—|—|—|—|—|—|—|—|—|—|—|—|—|2mo ago|
+sesame/csm-1b|Sesame: CSM 1B|37K|$7{2}|4,096|—|—|—|—|—|—|—|—|—|—|—|—|—|—|5mo ago|
