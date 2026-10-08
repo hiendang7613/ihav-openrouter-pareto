@@ -51,6 +51,15 @@ python3 $CLI diff --project . 20261007T053600Z 20261008T020000Z
 
 Exit codes: `0` success, `2` usage or missing state, `3` incomplete Table or build not validated, `4` network or HTTP failure, `1` other errors.
 
+One command without an LLM or a browser, from a checkout (tabs: text, image, video, speech, decisions; `--modalities` changes them):
+
+```bash
+python3 scripts/charts.py             # live: init, enable the tabs in config.json, fetch, build
+python3 scripts/charts.py --offline   # no network: the saved 2026-10-07 answers and Table captures
+```
+
+A live run has no Table, so Weekly Tokens, Latency and Throughput are `unavailable`; the video and decisions tabs have no API metric and show "no chart". With the 2026-10-07 Tables, decisions charts weekly usage; video still has none, because its Weekly Tokens are `—` and its catalog prices are `0`.
+
 ## What the page shows
 
 - A tab per modality in `config.json` (default text, image, speech).
