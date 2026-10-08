@@ -10,6 +10,7 @@
 - Add the measured Arena cost per task (mean `costUsd` of the model's scored tasks, with n) as a column, a hover line, CSV columns (`arena_cost_per_task_usd`, `arena_cost_n`) and a selectable x axis labelled "measured, not a list price"; it is never a default and never makes an offer paid or free.
 - Leave video-input SKUs out of the video per-second "from" price, and read Arena and stats answers as exact Decimals.
 - `diff` reports the measured Arena cost per task under its own key, `measured_cost_changes`, apart from `price_changes`.
+- `scripts/charts.py` prints a short summary and opens the page by default; `--json` prints the full result, `--no-open` skips the browser.
 
 ## 0.1.0 — 2026-10-08
 

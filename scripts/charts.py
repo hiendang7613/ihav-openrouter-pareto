@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""One command, no LLM and no browser: OpenRouter Pareto charts for text, image, video, speech and decisions.
+"""One command, no LLM and no browser automation: OpenRouter Pareto charts for text, image, video, speech and decisions.
+
+    python3 scripts/charts.py --offline   # seconds, no network: the saved fixtures
+    python3 scripts/charts.py             # live data
 
 Live (default): `init`, enable the modalities in config.json, `fetch` (the public, key-free GETs, including the model-page
 Arena "Checks passed" and p50 latency: 675 GETs in 9 min 26 s on 2026-10-08), `build`. Weekly Tokens and the Table's Latency and Throughput come
@@ -8,7 +11,9 @@ metric, so it charts "Latency vs price" (speed, not quality).
 --offline: no network; replays the saved 2026-10-07 catalog, image endpoint and Table captures and the 2026-10-08
 model-page answers of a few models, then `build`.
 
-Prints one JSON object. Exit codes as the CLI: 0 validated, 3 not validated, 2 usage, 4 network or HTTP failure.
+Prints a short summary and opens the page in the default browser; `--json` prints the full result as one JSON object
+instead, and `--no-open` leaves the browser alone. Exit codes as the CLI: 0 validated, 3 not validated, 2 usage,
+4 network or HTTP failure.
 """
 
 from __future__ import annotations
@@ -16,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import webbrowser
 from pathlib import Path
 from typing import Sequence
 
@@ -84,17 +90,38 @@ def run(args: argparse.Namespace) -> tuple[dict, int]:
     return summary, 0 if result["validated"] else 3
 
 
+def summary(result: dict) -> str:
+    """A few lines for a person: what was built, each tab's default view, and where the page is."""
+    lines = [f"{result['mode']} capture {result['capture_id']}: {'validated' if result['validated'] else 'NOT validated'}"]
+    lines += [f"problem: {p}" for p in result["problems"]] + [f"warning: {w}" for w in result["warnings"]]
+    for name, tab in result["tabs"].items():
+        view = f"{tab['metric']} vs {tab['price']}" if tab["metric"] else "no chart"
+        lines.append(f"  {name:<10} {tab['valid']:>4}/{tab['total']:<4} {view}")
+    lines.append(f"html: {Path(result['html']).resolve()}")
+    return "\n".join(lines)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="OpenRouter Pareto charts as one HTML page, without an LLM or a browser.")
+    parser = argparse.ArgumentParser(description="OpenRouter Pareto charts as one HTML page, without an LLM or browser automation.")
     parser.add_argument("--project", type=Path, default=Path("."), help="folder that holds .ihav_space/ (default: current folder)")
     parser.add_argument("--modalities", default=MODALITIES, help=f"comma-separated tabs, in order (default: {MODALITIES})")
     parser.add_argument("--offline", action="store_true", help="no network: replay the saved 2026-10-07 answers and Tables and 2026-10-08 model-page answers")
     parser.add_argument("--no-latency", action="store_true", help="skip the model-page latency route (one GET per model)")
+    parser.add_argument("--json", action="store_true", help="print the full result as one JSON object instead of a short summary")
+    parser.add_argument("--no-open", action="store_true", help="do not open the page in the default browser")
+    args = parser.parse_args(argv)
     try:
-        result, code = run(parser.parse_args(argv))
+        result, code = run(args)
     except ParetoError as exc:
         result, code = {"error": {"code": exc.code, "message": str(exc)}}, exc.exit_code
-    print(json.dumps(result, ensure_ascii=False, indent=1, default=as_text))
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, indent=1, default=as_text))
+    elif "error" in result:
+        print(f"error ({result['error']['code']}): {result['error']['message']}", file=sys.stderr)
+    else:
+        print(summary(result))
+    if "html" in result and not args.no_open:
+        webbrowser.open(Path(result["html"]).resolve().as_uri())
     return code
 
 
