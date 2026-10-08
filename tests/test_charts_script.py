@@ -22,14 +22,15 @@ def test_offline_run_builds_five_tabs_and_keeps_set_config(tmp_path, capsys):
     out = json.loads(capsys.readouterr().out)
     assert code == 0 and out["validated"] and out["mode"] == "offline"
     assert list(out["tabs"]) == ["text", "image", "video", "speech", "decisions"]
-    assert out["tabs"]["decisions"]["valid"] == 13 and out["tabs"]["decisions"]["excluded"] == {"alias": 1}
+    decisions = out["tabs"]["decisions"]
+    assert (decisions["metric"], decisions["valid"], decisions["excluded"]) == ("stats.latency_p50_s", 2, {"alias": 1, "missing_metric": 11})
     video = out["tabs"]["video"]
     assert (video["metric"], video["price"], video["valid"], video["total"]) == ("arena.checks_passed_pct", "video_output|per_second", 3, 30)
     assert video["excluded"] == {"missing_metric": 1, "missing_price": 26} and video["with_latency"] == 4
     assert out["model_pages"]["arena"]["ok"] == 9 and out["stopped"] == []
     assert out["tabs"]["speech"]["price"] == "input|per_m_tokens" and "bytedance-seed/seedream-4.5" not in out["endpoints_failed"]
     config = json.loads(space.config_path.read_text(encoding="utf-8"))
-    assert config["price_components"]["speech"] == ["input"] and config["price_components"]["video"] == ["video_output"]
+    assert config["price_components"]["speech"] == ["input"] and config["price_components"]["video"] == ["video_output", "arena_task"]
     assert config["price_components"]["decisions"] == ["input", "output"]
     assert config["table_urls"]["decisions"].endswith("output_modalities=decisions")
 

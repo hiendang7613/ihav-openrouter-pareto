@@ -1,4 +1,4 @@
-"""Plan 12.3: the frontier equals the pairwise dominance rule; views never mix units or Design Arena categories."""
+"""Plan 12.3 and bản 4: the frontier equals the pairwise dominance rule (max score, or min latency); views never mix units or Design Arena categories."""
 
 from __future__ import annotations
 
@@ -15,8 +15,14 @@ def dominates(a, b):
     return a[0] <= b[0] and a[1] >= b[1] and (a[0] < b[0] or a[1] > b[1])
 
 
-def oracle(points):
-    return {p[2] for p in points if not any(dominates(q, p) for q in points if q is not p)}
+def dominates_lower(a, b):
+    """Lower is better (latency): A dominates B when it is no dearer and no slower, and strictly one of them."""
+    return a[0] <= b[0] and a[1] <= b[1] and (a[0] < b[0] or a[1] < b[1])
+
+
+def oracle(points, better="higher"):
+    rule = dominates if better == "higher" else dominates_lower
+    return {p[2] for p in points if not any(rule(q, p) for q in points if q is not p)}
 
 
 def test_every_subset_of_a_3x3_grid_matches_pairwise_dominance():
@@ -24,6 +30,13 @@ def test_every_subset_of_a_3x3_grid_matches_pairwise_dominance():
     for size in range(len(grid) + 1):
         for subset in itertools.combinations(grid, size):
             assert set(pareto_front(subset)) == oracle(subset), subset
+
+
+def test_lower_is_better_frontier_matches_pairwise_dominance_on_every_subset():
+    grid = [(D(c), D(s), f"{c}{s}") for c in range(3) for s in range(3)]
+    for size in range(len(grid) + 1):
+        for subset in itertools.combinations(grid, size):
+            assert set(pareto_front((c, -s, k) for c, s, k in subset)) == oracle(subset, "lower"), subset
 
 
 def test_every_order_of_a_tie_fixture_gives_the_same_frontier():
@@ -53,8 +66,9 @@ def test_every_image_and_speech_view_and_the_text_defaults_match_the_pairwise_ru
             if modality["id"] == "text" and not key.endswith("|all"):
                 continue
             metric, component, unit, _ = key.split("|")
+            better = next(m["better"] for m in modality["metrics"] if m["id"] == metric)
             points = [(D(modality["offers"][i]["p"][f"{component}|{unit}"]["v"]), D(modality["offers"][i]["m"][metric]["v"]), i) for i in view["valid"]]
-            assert set(view["frontier"]) == oracle(points), key
+            assert set(view["frontier"]) == oracle(points, better), key
             checked += 1
     assert checked > 150
 

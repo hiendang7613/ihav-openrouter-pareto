@@ -23,8 +23,11 @@ INPUT_COMPONENTS, OUTPUT_COMPONENTS = {"input"}, {"output", "image_output", "aud
 TABLE_COLUMN_COMPONENTS = {"Input": INPUT_COMPONENTS, "Output": OUTPUT_COMPONENTS, "Single": INPUT_COMPONENTS | OUTPUT_COMPONENTS}
 TABLE_METRICS = {"Weekly Tokens": "usage.weekly_tokens", "Latency": "perf.latency_s", "Throughput": "perf.throughput_tps"}
 AA_KEYS = ("intelligence_index", "coding_index", "agentic_index")
-SOURCE_ORDER = ("table", "endpoint", "api")
+SOURCE_ORDER = ("table", "endpoint", "api", "arena")
 ARENA_METRIC, LATENCY_METRIC = "arena.checks_passed_pct", "stats.latency_p50_s"
+# The measured Arena cost per task is kept as its own price component and unit, apart from every list price.
+ARENA_COST_COMPONENT, ARENA_COST_UNIT = "arena_task", "per_task_measured"
+LIST_SOURCES = ("table", "endpoint", "api")
 
 
 def variant(model_id: str) -> str:
@@ -159,12 +162,27 @@ def latency_metric(endpoints: list, entry: dict) -> dict | None:
             "request_count": stats.get("request_count"), "window_minutes": stats.get("window_minutes"), "captured_at": entry["fetched_at"]}
 
 
+def arena_cost(pages: list, entry: dict, capture_id: str) -> dict | None:
+    """Mean `costUsd` of the model's own scored Arena cells: a measured cost per task with its count, not a list price."""
+    costs = [decimal(cell.get("costUsd")) for page in pages or [] for variant in (page.get("challenge") or {}).get("variants") or []
+             for cell in variant.get("cells") or [] if cell.get("score") and (cell.get("model") or {}).get("permaslug") == entry["permaslug"]]
+    costs = [c for c in costs if c is not None and c >= 0]
+    if not costs:
+        return None
+    mean = sum(costs) / len(costs)
+    price = observation(f"arena:{entry['modality']}", mean, ARENA_COST_COMPONENT, ARENA_COST_UNIT, "arena", capture_id,
+                        raw_label=f"${as_text(mean)} mean of {len(costs)} scored Arena tasks")
+    price["sample_n"] = len(costs)
+    return price
+
+
 def video_prices(endpoints: list, capture_id: str) -> list[dict]:
-    """Every per-second SKU and tier the model page lists; other units (per megapixel-second, per M tokens) stay in the capture only."""
+    """Every per-second SKU and tier the model page lists, except video-input SKUs (plan bản 4, a different task);
+    other units (per megapixel-second, per M tokens) stay in the capture only."""
     out = []
     for endpoint in endpoints:
         for item in endpoint.get("display_pricing") or []:
-            if item.get("unitLabel") != "/second" or item.get("displayMultiplier", 1) != 1:
+            if item.get("unitLabel") != "/second" or item.get("displayMultiplier", 1) != 1 or "video input" in (item.get("sku_label") or "").lower():
                 continue
             sku = item.get("sku_label") or "video"
             labels = [(sku, item.get("price"))] + [(f"{sku} {t.get('sku_label')}", t.get("price")) for t in item.get("tiers") or []]
@@ -183,10 +201,13 @@ def attach_page_data(offers: dict, manifest: dict, folder: Path, capture_id: str
         for entry in manifest.get(source, []):
             if entry["status"] != "ok":
                 continue
-            data = json.loads((folder / entry["file"]).read_text(encoding="utf-8")).get("data")
+            data = json.loads((folder / entry["file"]).read_text(encoding="utf-8"), parse_float=Decimal).get("data")
             if source == "arena":
                 metric = arena_metric((data or {}).get("standing"), entry)
                 targets = by_permaslug.get(entry["permaslug"], [])
+                cost = arena_cost((data or {}).get("pages"), entry, capture_id)
+                for offer in targets if cost else []:
+                    offer["prices"].append(dict(cost))
             else:
                 metric = latency_metric(data if isinstance(data, list) else [], entry)
                 targets = [o for o in by_permaslug.get(entry["permaslug"], []) if ":" not in o["id"]]

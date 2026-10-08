@@ -4,7 +4,7 @@
 Live (default): `init`, enable the modalities in config.json, `fetch` (the public, key-free GETs, including the model-page
 Arena "Checks passed" and p50 latency: 675 GETs in 9 min 26 s on 2026-10-08), `build`. Weekly Tokens and the Table's Latency and Throughput come
 only from the models Table, which needs a browser, so a live build marks them `unavailable`; decisions has no public quality
-metric, so its tab shows "no chart".
+metric, so it charts "Latency vs price" (speed, not quality).
 --offline: no network; replays the saved 2026-10-07 catalog, image endpoint and Table captures and the 2026-10-08
 model-page answers of a few models, then `build`.
 

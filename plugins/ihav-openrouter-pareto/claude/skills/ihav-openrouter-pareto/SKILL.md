@@ -28,7 +28,7 @@ This skill owns the browser step; follow [table capture](../../../core/ihav-open
 
 - Never guess a price, score, unit or model match. Report what the JSON returns.
 - Announce `latest` only when `build` returns `"validated": true`. Otherwise quote its `problems` and say that `latest` stayed where it was.
-- Weekly tokens measure usage, not quality; call a weekly-tokens chart "Weekly usage vs price". The image, video and speech default charts are "Checks passed vs price" (OpenRouter's public Arena score); latency is a table column, never an axis.
-- A "from" price is a lower bound. Prices are list prices, not the cost of a task, and units are never converted.
+- Weekly tokens measure usage, not quality; call a weekly-tokens chart "Weekly usage vs price". The image, video and speech default charts are "Checks passed vs price" (OpenRouter's public Arena score); decisions defaults to "Latency vs price", which measures speed, not quality (lower is better).
+- A "from" price is a lower bound. Prices are list prices, not the cost of a task, and units are never converted. The one exception is the basis "USD per Arena task (measured)": call it a measured mean cost of n Arena tasks, never a price.
 - Keep a missing host capability (no browser tool) separate from a parser or data error when you report.
 - Use only the public, key-free GETs that `fetch` makes. No API key, cookie, login or paid call. If a command reports HTTP 401, 403, 429 or a network error, report the message as returned and stop; do not retry through another route. A `fetch` result with `stopped` means a model-page route got 401, 403 or 429 and was not asked again; report it with the counts.

@@ -6,13 +6,14 @@ from collections import Counter
 from decimal import Decimal
 
 from . import __version__
-from .normalize import AA_KEYS, ARENA_METRIC, LATENCY_METRIC, TABLE_METRICS, select_price
+from .normalize import AA_KEYS, ARENA_COST_UNIT, ARENA_METRIC, LATENCY_METRIC, LIST_SOURCES, TABLE_METRICS, select_price
 from .pareto import pareto_front
 from .space import as_text, iso, utc_now
 
 SCOPES = ("all", "standard", "batch", "free")
 UNIT_LABELS = {"per_m_tokens": "USD per 1M tokens", "per_image": "USD per image", "per_megapixel": "USD per megapixel",
-               "per_m_chars": "USD per 1M characters", "per_minute": "USD per minute", "per_second": "USD per second"}
+               "per_m_chars": "USD per 1M characters", "per_minute": "USD per minute", "per_second": "USD per second",
+               ARENA_COST_UNIT: "USD per Arena task (measured mean, not a list price)"}
 METRIC_TEXT = {
     "aa.intelligence_index": ("Artificial Analysis Intelligence Index", "Intelligence vs price"),
     "aa.coding_index": ("Artificial Analysis Coding Index", "Coding vs price"),
@@ -20,23 +21,31 @@ METRIC_TEXT = {
     ARENA_METRIC: ("Arena checks passed, %", "Checks passed vs price"),
     "usage.weekly_tokens": ("Weekly tokens (usage, not quality)", "Weekly usage vs price"),
     "perf.throughput_tps": ("Throughput, tokens per second", "Throughput vs price"),
-    "perf.latency_s": ("Latency, seconds", "Latency"),
-    LATENCY_METRIC: ("Latency p50, seconds (model page, last 30 minutes)", "Latency"),
+    "perf.latency_s": ("Latency, seconds (Table)", "Latency vs price (speed, not quality; lower is better)"),
+    LATENCY_METRIC: ("Latency p50, seconds (model page, last 30 minutes)", "Latency vs price (speed, not quality; lower is better)"),
 }
-NOT_AXIS = ("perf.latency_s", LATENCY_METRIC)
+# Lower is better for these; their frontier is minimum price and minimum value (plan bản 4).
+LOWER_BETTER = ("perf.latency_s", LATENCY_METRIC)
+LOG_SCALE = ("usage.weekly_tokens", "perf.latency_s", LATENCY_METRIC)
 NOTES = [
-    "Prices are OpenRouter list prices, not the cost of a task; units are never converted, so each chart uses one price unit.",
+    "Prices are OpenRouter list prices, not the cost of a task, except the basis 'USD per Arena task (measured)'; units are never "
+    "converted, so each chart uses one price unit.",
     "Weekly tokens measure usage, not quality.",
     "A Table price label carries no unit in the captured text; it takes the unit of an equal API price, otherwise it stays 'unknown' and is not plotted.",
     "Routers (price -1) and ~...-latest aliases are excluded by exact id; their raw rows stay in the capture.",
     "Checks passed is OpenRouter's public Arena score for image, video and speech models: checks passed over checks run on the "
     "Arena's own prompts. It rates the model, so every offer of that model shows the same score.",
     "Latency is the lowest provider p50 on the model page over the 30 minutes before the capture, for the standard offer: time to "
-    "first token for text, generation time for image and video, full response for speech and decisions. It is a column, not an axis, "
-    "because lower is better.",
-    "Video prices are OpenRouter's per-second list prices from the model page; with several SKUs or resolution tiers the lowest is "
-    "shown as a 'from' lower bound.",
+    "first token for text, generation time for image and video, full response for speech and decisions. A latency chart shows "
+    "speed, not quality; lower is better.",
+    "Video prices are OpenRouter's per-second list prices from the model page, without video-input SKUs; with several SKUs or "
+    "resolution tiers the lowest is shown as a 'from' lower bound.",
+    "'USD per Arena task (measured)' is the mean cost OpenRouter's Arena recorded for the model's own scored tasks (n in hover). "
+    "It is a measured cost, not a list price; each model's task set can differ slightly, and a video task is one clip at the "
+    "Arena's own length and resolution.",
 ]
+LOWER_BETTER_NOTE = "Lower is better: the step line is the lowest value observed at a price up to that point."
+MEASURED_NOTE = "Prices on this chart are measured Arena costs per task, not list prices."
 LOWER_BOUND_NOTE = "Prices marked 'from' are lower bounds; the frontier uses the displayed price at display precision."
 
 
@@ -54,10 +63,8 @@ def metric_def(metric_id: str, available: bool) -> dict:
         label, title = f"Design Arena ELO, {name}", f"Design Arena {name} ELO vs price"
     else:
         label, title = METRIC_TEXT.get(metric_id, (metric_id, f"{metric_id} vs price"))
-    definition = {"id": metric_id, "label": label, "title": title, "scale": "log" if metric_id == "usage.weekly_tokens" else "linear",
-                  "axis": metric_id not in NOT_AXIS, "status": "ok" if available else "unavailable", "reason": None}
-    if metric_id in NOT_AXIS:
-        definition["reason"] = "lower is better, and the frontier rule maximises the score; shown in the table and hover only"
+    definition = {"id": metric_id, "label": label, "title": title, "scale": "log" if metric_id in LOG_SCALE else "linear",
+                  "better": "lower" if metric_id in LOWER_BETTER else "higher", "status": "ok" if available else "unavailable", "reason": None}
     if not available:
         definition["reason"] = "no Table capture for this modality (browser step not run); API-only build"
     return definition
@@ -74,10 +81,15 @@ def price_entry(offer: dict, component: str, unit: str) -> dict | None:
         return None
     obs, lower_bound = chosen
     value = obs["value"]
-    paid = any(p["status"] == "ok" and p["value"] > 0 for p in offer["prices"])
+    paid = any(p["value"] > 0 for p in list_prices(offer))
     display = obs["raw_label"] if obs["source"] == "table" else ("from " if lower_bound else "") + "$" + short(value)
     return {"x": float(value), "v": as_text(value), "d": display, "q": obs["qualifier"], "s": obs["source"], "raw": obs["raw_label"],
-            "col": obs["column"], "lb": lower_bound, "fc": value == 0 and paid, "dp": obs["discount_pct"]}
+            "col": obs["column"], "lb": lower_bound, "fc": value == 0 and paid, "dp": obs["discount_pct"], "n": obs.get("sample_n")}
+
+
+def list_prices(offer: dict) -> list[dict]:
+    """Valid list prices; a measured Arena cost never makes an offer paid or free."""
+    return [p for p in offer["prices"] if p["status"] == "ok" and p["source"] in LIST_SOURCES]
 
 
 def tab_metrics(offer: dict, modality: str) -> dict:
@@ -89,7 +101,7 @@ def offer_entry(offer: dict, bases: list[dict], metrics: list[str], modality: st
     prices = {b["id"]: price_entry(offer, b["component"], b["unit"]) for b in bases}
     found = tab_metrics(offer, modality)
     values = {m: found[m] for m in metrics if m in found}
-    ok_prices = [p for p in offer["prices"] if p["status"] == "ok"]
+    ok_prices = list_prices(offer)
     return {
         "id": offer["id"], "name": offer["name"], "variant": offer["variant"], "match": offer["match"],
         "excluded": (offer["excluded"] or {}).get("reason"), "detail": (offer["excluded"] or {}).get("detail"),
@@ -111,7 +123,10 @@ def exclusion_reason(entry: dict, metric: str, basis: str, incomplete_tables: bo
     return None
 
 
-def build_view(entries: list[dict], metric: str, basis: str, scope: str, incomplete_tables: bool) -> dict:
+def build_view(entries: list[dict], metric: dict, basis: dict, scope: str, incomplete_tables: bool) -> dict:
+    """Valid offers cheapest first, and the frontier: minimum price with maximum score, or minimum value when lower is better."""
+    sign = -1 if metric["better"] == "lower" else 1
+    metric, measured, basis = metric["id"], basis["measured"], basis["id"]
     in_scope = [i for i, e in enumerate(entries) if scope == "all" or e["variant"] == scope]
     valid, excluded = [], Counter()
     for i in in_scope:
@@ -121,9 +136,10 @@ def build_view(entries: list[dict], metric: str, basis: str, scope: str, incompl
         else:
             valid.append(i)
     price = lambda i: Decimal(entries[i]["p"][basis]["v"])  # noqa: E731
-    score = lambda i: Decimal(entries[i]["m"][metric]["v"])  # noqa: E731
+    score = lambda i: sign * Decimal(entries[i]["m"][metric]["v"])  # noqa: E731
     valid.sort(key=lambda i: (price(i), -score(i), entries[i]["id"]))
     notes = [LOWER_BOUND_NOTE] if any(entries[i]["p"][basis]["lb"] for i in valid) else []
+    notes += ([LOWER_BETTER_NOTE] if sign < 0 else []) + ([MEASURED_NOTE] if measured else [])
     return {"valid": valid, "frontier": pareto_front((price(i), score(i), i) for i in valid), "total": len(in_scope),
             "excluded": dict(sorted(excluded.items())), "notes": notes}
 
@@ -136,21 +152,24 @@ def modality_report(modality: str, offers: list[dict], config: dict, has_table: 
     bases = []
     for component in config["price_components"].get(modality, []):
         units = sorted({p["unit"] for o in usable for p in o["prices"] if p["status"] == "ok" and p["component"] == component and p["unit"] in UNIT_LABELS})
-        bases += [{"id": f"{component}|{u}", "component": component, "unit": u, "label": f"{component.replace('_', ' ')} · {UNIT_LABELS[u]}"} for u in units]
+        bases += [{"id": f"{component}|{u}", "component": component, "unit": u, "label": f"{component.replace('_', ' ')} · {UNIT_LABELS[u]}",
+                   "measured": u == ARENA_COST_UNIT} for u in units]
     entries = [offer_entry(o, bases, metric_ids, modality) for o in members]
-    views = {f"{m['id']}|{b['id']}|{s}": build_view(entries, m["id"], b["id"], s, incomplete_tables)
-             for m in metrics if m["axis"] and m["status"] == "ok" for b in bases for s in SCOPES}
+    views = {f"{m['id']}|{b['id']}|{s}": build_view(entries, m, b, s, incomplete_tables)
+             for m in metrics if m["status"] == "ok" for b in bases for s in SCOPES}
     return {"id": modality, "label": modality.capitalize(), "metrics": metrics, "bases": bases, "scopes": list(SCOPES),
             "offers": entries, "views": views, "default": default_view(metrics, bases, views, config["default_metric"].get(modality))}
 
 
 def default_view(metrics: list[dict], bases: list[dict], views: dict, preferred: str | None) -> dict | None:
-    """The configured metric (else the first chartable one) with the price basis that has the most valid offers."""
-    chartable = [m["id"] for m in metrics if m["axis"] and m["status"] == "ok"]
-    if not chartable or not bases:
+    """The configured metric (else the first chartable one) with the list-price basis that has the most valid offers;
+    the measured Arena cost is never a default (plan bản 4)."""
+    chartable = [m["id"] for m in metrics if m["status"] == "ok"]
+    listed = [b for b in bases if not b["measured"]]
+    if not chartable or not listed:
         return None
     metric = preferred if preferred in chartable else chartable[0]
-    basis = max(bases, key=lambda b: len(views[f"{metric}|{b['id']}|all"]["valid"]))["id"]
+    basis = max(listed, key=lambda b: len(views[f"{metric}|{b['id']}|all"]["valid"]))["id"]
     return {"metric": metric, "basis": basis, "scope": "all"}
 
 

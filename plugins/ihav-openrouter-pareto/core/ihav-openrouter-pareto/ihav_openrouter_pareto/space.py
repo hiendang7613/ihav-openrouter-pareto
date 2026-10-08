@@ -57,16 +57,18 @@ DEFAULT_CONFIG = {
         "displayed price labels (from, N% off)": "table",
         "arena.checks_passed_pct (checksPassed / checksTotal)": "arena",
         "stats.latency_p50_s, video list prices per second (display_pricing)": "stats",
+        "measured Arena cost per task (mean costUsd of scored cells)": "arena",
     },
     "price_components": {
         "text": ["input", "output"],
-        "image": ["output_image", "image_output", "input", "output"],
-        "speech": ["input", "output", "audio_output"],
-        "video": ["video_output"],
+        # `arena_task` is the measured Arena cost per task, never a list price and never a default basis (plan bản 4).
+        "image": ["output_image", "image_output", "input", "output", "arena_task"],
+        "speech": ["input", "output", "audio_output", "arena_task"],
+        "video": ["video_output", "arena_task"],
         "decisions": ["input", "output"],
     },
     "default_metric": {"text": "aa.intelligence_index", "image": "arena.checks_passed_pct", "video": "arena.checks_passed_pct",
-                       "speech": "arena.checks_passed_pct", "decisions": "usage.weekly_tokens"},
+                       "speech": "arena.checks_passed_pct", "decisions": "stats.latency_p50_s"},
     "routers": {
         "openrouter/auto": "router: picks another model per request; price -1",
         "openrouter/auto-beta": "router: picks another model per request; price -1",

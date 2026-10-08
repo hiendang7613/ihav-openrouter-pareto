@@ -4,7 +4,7 @@
   var DATA = JSON.parse(document.getElementById('report-data').textContent);
   var NS = 'http://www.w3.org/2000/svg';
   var ORIGIN = 'https://openrouter.ai/';
-  var LATENCY = 'stats.latency_p50_s', TABLE_LATENCY = 'perf.latency_s';
+  var LATENCY = 'stats.latency_p50_s', TABLE_LATENCY = 'perf.latency_s', ARENA_COST = 'arena_task|per_task_measured';
   var W = 960, H = 540, M = { l: 72, r: 24, t: 16, b: 56 }, ZERO_BAND = 48;
   var state = { mod: null, metric: null, basis: null, scope: null };
 
@@ -24,13 +24,15 @@
   function clear(e) { while (e.firstChild) e.removeChild(e.firstChild); }
   function byId(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
   function clip(s, n) { var a = Array.from(s); return a.length > n ? a.slice(0, n - 1).join('') + '…' : s; }
-  // Latency is never an axis (lower is better); both sources are shown, each with its own label.
+  // Latency columns show both sources, each with its own label; a latency chart is chosen in the Metric selector.
   function latency(o) {
     var parts = [];
     if (o.m[LATENCY]) parts.push(o.m[LATENCY].d + ' (model page)');
     if (o.m[TABLE_LATENCY]) parts.push(o.m[TABLE_LATENCY].d + ' (Table)');
     return parts.join('; ');
   }
+  // Measured Arena cost per task: shown apart from list prices, with the number of tasks it averages.
+  function arenaCost(o) { var c = o.p[ARENA_COST]; return c ? c.d + ' (mean of ' + c.n + ')' : ''; }
   function counts(c) { return Object.keys(c || {}).map(function (k) { return c[k] + ' ' + k; }).join(', ') || 'none'; }
   function modelHref(id) { return ORIGIN + id.split('/').map(encodeURIComponent).join('/'); }
   function compact(v) {
@@ -91,7 +93,7 @@
     var d = state.mod.default || {};
     state.metric = d.metric; state.basis = d.basis; state.scope = d.scope || 'all';
     fill($('metric'), state.mod.metrics, state.metric, function (m) { return m.label; },
-      function (m) { return m.status !== 'ok' ? m.reason : (!m.axis ? m.reason : null); });
+      function (m) { return m.status !== 'ok' ? m.reason : null; });
     fill($('basis'), state.mod.bases, state.basis, function (b) { return b.label; }, function () { return null; });
     fill($('scope'), state.mod.scopes, state.scope, function (s) { return s; }, function () { return null; });
     var list = $('excluded').querySelector('ul');
@@ -196,6 +198,7 @@
       else if (p.p.fc) div.appendChild(el('div', 'This price is 0; other prices of the offer are not'));
       div.appendChild(el('div', metric.label + ': ' + p.m.d));
       if (latency(p.o)) div.appendChild(el('div', 'Latency: ' + latency(p.o)));
+      if (arenaCost(p.o)) div.appendChild(el('div', 'Arena cost per task (measured, not a list price): ' + arenaCost(p.o)));
       box.appendChild(div);
     });
     box.hidden = false;
@@ -220,6 +223,7 @@
       tr.appendChild(el('td', p.p.d + (p.p.lb ? ' (lower bound)' : '') + (p.p.fc ? ' (0 in a paid offer)' : ''), 'num'));
       tr.appendChild(el('td', p.m.d, 'num'));
       tr.appendChild(el('td', latency(p.o), 'num'));
+      tr.appendChild(el('td', arenaCost(p.o), 'num'));
       tr.appendChild(el('td', front[p.i] ? 'frontier' : ''));
       tr.appendChild(el('td', p.p.s + ' · ' + p.p.col));
       body.appendChild(tr);
