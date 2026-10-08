@@ -1,0 +1,246 @@
+{
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/black-forest-labs/flux-video-upscale-20260819?tab=video": {
+  "error": "HTTP 404 from https://openrouter.ai/api/frontend/v1/arena/explore/models/black-forest-labs/flux-video-upscale-20260819?tab=video",
+  "fetched_at": "2026-10-08T04:49:12Z",
+  "file": null,
+  "modality": "video",
+  "permaslug": "black-forest-labs/flux-video-upscale-20260819",
+  "source": "arena",
+  "status": 404
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/bytedance-seed/seedream-4.5-20251203?tab=image": {
+  "fetched_at": "2026-10-08T04:49:01Z",
+  "file": "arena_image_bytedance-seed%2Fseedream-4.5-20251203.json",
+  "modality": "image",
+  "permaslug": "bytedance-seed/seedream-4.5-20251203",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/bytedance/seedance-2.0-20260414?tab=video": {
+  "fetched_at": "2026-10-08T04:49:13Z",
+  "file": "arena_video_bytedance%2Fseedance-2.0-20260414.json",
+  "modality": "video",
+  "permaslug": "bytedance/seedance-2.0-20260414",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/fish-audio/s2.1-pro-free-20260729?tab=speech": {
+  "error": "HTTP 404 from https://openrouter.ai/api/frontend/v1/arena/explore/models/fish-audio/s2.1-pro-free-20260729?tab=speech",
+  "fetched_at": "2026-10-08T04:49:20Z",
+  "file": null,
+  "modality": "speech",
+  "permaslug": "fish-audio/s2.1-pro-free-20260729",
+  "source": "arena",
+  "status": 404
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/google/gemini-3.1-flash-image-preview-20260226?tab=image": {
+  "fetched_at": "2026-10-08T04:49:03Z",
+  "file": "arena_image_google%2Fgemini-3.1-flash-image-preview-20260226.json",
+  "modality": "image",
+  "permaslug": "google/gemini-3.1-flash-image-preview-20260226",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/google/gemini-3.8-flash-tts-20260922?tab=speech": {
+  "fetched_at": "2026-10-08T04:49:21Z",
+  "file": "arena_speech_google%2Fgemini-3.8-flash-tts-20260922.json",
+  "modality": "speech",
+  "permaslug": "google/gemini-3.8-flash-tts-20260922",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/google/veo-3.1-20260320?tab=video": {
+  "fetched_at": "2026-10-08T04:49:14Z",
+  "file": "arena_video_google%2Fveo-3.1-20260320.json",
+  "modality": "video",
+  "permaslug": "google/veo-3.1-20260320",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/heygen/avatar-iv-20260625?tab=video": {
+  "error": "HTTP 404 from https://openrouter.ai/api/frontend/v1/arena/explore/models/heygen/avatar-iv-20260625?tab=video",
+  "fetched_at": "2026-10-08T04:49:15Z",
+  "file": null,
+  "modality": "video",
+  "permaslug": "heygen/avatar-iv-20260625",
+  "source": "arena",
+  "status": 404
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/inclusionai/ming-image-0.1-design-20260922?tab=image": {
+  "error": "HTTP 404 from https://openrouter.ai/api/frontend/v1/arena/explore/models/inclusionai/ming-image-0.1-design-20260922?tab=image",
+  "fetched_at": "2026-10-08T04:49:05Z",
+  "file": null,
+  "modality": "image",
+  "permaslug": "inclusionai/ming-image-0.1-design-20260922",
+  "source": "arena",
+  "status": 404
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/kwaivgi/kling-v3.0-pro-20260429?tab=video": {
+  "fetched_at": "2026-10-08T04:49:16Z",
+  "file": "arena_video_kwaivgi%2Fkling-v3.0-pro-20260429.json",
+  "modality": "video",
+  "permaslug": "kwaivgi/kling-v3.0-pro-20260429",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/meta/muse-image-1.0-eval-20260824?tab=image": {
+  "fetched_at": "2026-10-08T04:49:06Z",
+  "file": "arena_image_meta%2Fmuse-image-1.0-eval-20260824.json",
+  "modality": "image",
+  "permaslug": "meta/muse-image-1.0-eval-20260824",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/microsoft/mai-voice-2?tab=speech": {
+  "fetched_at": "2026-10-08T04:49:22Z",
+  "file": "arena_speech_microsoft%2Fmai-voice-2.json",
+  "modality": "speech",
+  "permaslug": "microsoft/mai-voice-2",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/arena/explore/models/openai/gpt-image-2.5-sunburst-20260908?tab=image": {
+  "fetched_at": "2026-10-08T04:49:07Z",
+  "file": "arena_image_openai%2Fgpt-image-2.5-sunburst-20260908.json",
+  "modality": "image",
+  "permaslug": "openai/gpt-image-2.5-sunburst-20260908",
+  "source": "arena",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=anthropic/claude-sonnet-5.5-20260928&variant=standard&perfWorkload=text_generation&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:48:59Z",
+  "file": "stats_text_anthropic%2Fclaude-sonnet-5.5-20260928.json",
+  "modality": "text",
+  "permaslug": "anthropic/claude-sonnet-5.5-20260928",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=black-forest-labs/flux-video-upscale-20260819&variant=standard&perfWorkload=video_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:17Z",
+  "file": "stats_video_black-forest-labs%2Fflux-video-upscale-20260819.json",
+  "modality": "video",
+  "permaslug": "black-forest-labs/flux-video-upscale-20260819",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=bytedance-seed/seedream-4.5-20251203&variant=standard&perfWorkload=image_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:08Z",
+  "file": "stats_image_bytedance-seed%2Fseedream-4.5-20251203.json",
+  "modality": "image",
+  "permaslug": "bytedance-seed/seedream-4.5-20251203",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=bytedance/seedance-2.0-20260414&variant=standard&perfWorkload=video_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:17Z",
+  "file": "stats_video_bytedance%2Fseedance-2.0-20260414.json",
+  "modality": "video",
+  "permaslug": "bytedance/seedance-2.0-20260414",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=fish-audio/s2.1-pro-free-20260729&variant=standard&perfWorkload=tts&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:24Z",
+  "file": "stats_speech_fish-audio%2Fs2.1-pro-free-20260729.json",
+  "modality": "speech",
+  "permaslug": "fish-audio/s2.1-pro-free-20260729",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=google/gemini-3.1-flash-image-preview-20260226&variant=standard&perfWorkload=image_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:09Z",
+  "file": "stats_image_google%2Fgemini-3.1-flash-image-preview-20260226.json",
+  "modality": "image",
+  "permaslug": "google/gemini-3.1-flash-image-preview-20260226",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=google/gemini-3.1-flash-image-preview-20260226&variant=standard&perfWorkload=text_generation&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:00Z",
+  "file": "stats_text_google%2Fgemini-3.1-flash-image-preview-20260226.json",
+  "modality": "text",
+  "permaslug": "google/gemini-3.1-flash-image-preview-20260226",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=google/gemini-3.8-flash-tts-20260922&variant=standard&perfWorkload=tts&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:25Z",
+  "file": "stats_speech_google%2Fgemini-3.8-flash-tts-20260922.json",
+  "modality": "speech",
+  "permaslug": "google/gemini-3.8-flash-tts-20260922",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=google/veo-3.1-20260320&variant=standard&perfWorkload=video_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:18Z",
+  "file": "stats_video_google%2Fveo-3.1-20260320.json",
+  "modality": "video",
+  "permaslug": "google/veo-3.1-20260320",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=heygen/avatar-iv-20260625&variant=standard&perfWorkload=video_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:19Z",
+  "file": "stats_video_heygen%2Favatar-iv-20260625.json",
+  "modality": "video",
+  "permaslug": "heygen/avatar-iv-20260625",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=inclusionai/ming-image-0.1-design-20260922&variant=standard&perfWorkload=image_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:10Z",
+  "file": "stats_image_inclusionai%2Fming-image-0.1-design-20260922.json",
+  "modality": "image",
+  "permaslug": "inclusionai/ming-image-0.1-design-20260922",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=kwaivgi/kling-v3.0-pro-20260429&variant=standard&perfWorkload=video_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:20Z",
+  "file": "stats_video_kwaivgi%2Fkling-v3.0-pro-20260429.json",
+  "modality": "video",
+  "permaslug": "kwaivgi/kling-v3.0-pro-20260429",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=liquid/d1-20260930&variant=standard&perfWorkload=decisions&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:26Z",
+  "file": "stats_decisions_liquid%2Fd1-20260930.json",
+  "modality": "decisions",
+  "permaslug": "liquid/d1-20260930",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=meta/muse-image-1.0-eval-20260824&variant=standard&perfWorkload=image_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:10Z",
+  "file": "stats_image_meta%2Fmuse-image-1.0-eval-20260824.json",
+  "modality": "image",
+  "permaslug": "meta/muse-image-1.0-eval-20260824",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=microsoft/mai-voice-2&variant=standard&perfWorkload=tts&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:26Z",
+  "file": "stats_speech_microsoft%2Fmai-voice-2.json",
+  "modality": "speech",
+  "permaslug": "microsoft/mai-voice-2",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=openai/gpt-image-2.5-sunburst-20260908&variant=standard&perfWorkload=image_generation&latencyMetric=latency_e2e": {
+  "fetched_at": "2026-10-08T04:49:11Z",
+  "file": "stats_image_openai%2Fgpt-image-2.5-sunburst-20260908.json",
+  "modality": "image",
+  "permaslug": "openai/gpt-image-2.5-sunburst-20260908",
+  "source": "stats",
+  "status": 200
+ },
+ "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug=respan/span-01-lite-20260925&variant=standard&perfWorkload=decisions&latencyMetric=latency": {
+  "fetched_at": "2026-10-08T04:49:27Z",
+  "file": "stats_decisions_respan%2Fspan-01-lite-20260925.json",
+  "modality": "decisions",
+  "permaslug": "respan/span-01-lite-20260925",
+  "source": "stats",
+  "status": 200
+ }
+}

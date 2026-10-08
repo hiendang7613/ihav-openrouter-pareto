@@ -25,7 +25,21 @@ DEFAULT_CONFIG = {
         "models_url": "https://openrouter.ai/api/v1/models?output_modalities=all",
         # Typed per-unit prices; other modalities can be added when OpenRouter documents an equivalent route.
         "endpoints_url": {"image": "https://openrouter.ai/api/v1/images/models/{id}/endpoints"},
+        # Model-page data (plan bản 3): public, key-free routes the openrouter.ai model page reads, keyed by permaslug
+        # (the catalog's canonical_slug). Arena gives "Checks passed"; endpoint stats give p50 latency and video list prices.
+        "arena_url": "https://openrouter.ai/api/frontend/v1/arena/explore/models/{permaslug}?tab={tab}",
+        "stats_url": "https://openrouter.ai/api/frontend/v1/stats/endpoint?permaslug={permaslug}&variant=standard"
+                     "&perfWorkload={workload}&latencyMetric={latency_metric}",
         "request_delay_s": 0.2,
+    },
+    "arena_tabs": {"image": "image", "video": "video", "speech": "speech"},
+    # As the model page picks them; `meaning` is the page's own tooltip for that latency.
+    "perf_workloads": {
+        "text": {"workload": "text_generation", "latency_metric": "latency", "meaning": "time to first token"},
+        "image": {"workload": "image_generation", "latency_metric": "latency_e2e", "meaning": "time to generate the image"},
+        "video": {"workload": "video_generation", "latency_metric": "latency_e2e", "meaning": "time from job submission until the video is ready"},
+        "speech": {"workload": "tts", "latency_metric": "latency", "meaning": "time to return the generated audio"},
+        "decisions": {"workload": "decisions", "latency_metric": "latency", "meaning": "time to return the decision"},
     },
     "table_urls": {
         "text": TABLE_URL.format("text"),
@@ -41,13 +55,20 @@ DEFAULT_CONFIG = {
         "da.<arena>/<category>.elo": "api",
         "usage.weekly_tokens, perf.latency_s, perf.throughput_tps": "table",
         "displayed price labels (from, N% off)": "table",
+        "arena.checks_passed_pct (checksPassed / checksTotal)": "arena",
+        "stats.latency_p50_s, video list prices per second (display_pricing)": "stats",
+        "measured Arena cost per task (mean costUsd of scored cells)": "arena",
     },
     "price_components": {
         "text": ["input", "output"],
-        "image": ["output_image", "image_output", "input", "output"],
-        "speech": ["input", "output", "audio_output"],
+        # `arena_task` is the measured Arena cost per task, never a list price and never a default basis (plan bản 4).
+        "image": ["output_image", "image_output", "input", "output", "arena_task"],
+        "speech": ["input", "output", "audio_output", "arena_task"],
+        "video": ["video_output", "arena_task"],
+        "decisions": ["input", "output"],
     },
-    "default_metric": {"text": "aa.intelligence_index", "image": "usage.weekly_tokens", "speech": "usage.weekly_tokens"},
+    "default_metric": {"text": "aa.intelligence_index", "image": "arena.checks_passed_pct", "video": "arena.checks_passed_pct",
+                       "speech": "arena.checks_passed_pct", "decisions": "stats.latency_p50_s"},
     "routers": {
         "openrouter/auto": "router: picks another model per request; price -1",
         "openrouter/auto-beta": "router: picks another model per request; price -1",
@@ -64,7 +85,7 @@ SPACE_README = """# ihav-openrouter-pareto state
 Created by the ihav-openrouter-pareto plugin. Safe to delete; `fetch` and the skill's Table step rebuild it.
 
 - `config.json`: modalities, source URLs, field-to-source map, router list, price components per chart.
-- `captures/<capture_id>/`: raw public API answers, typed endpoint prices, pasted Table text and `manifest.json`.
+- `captures/<capture_id>/`: raw public API answers, typed endpoint prices, Arena and endpoint-stats answers, pasted Table text and `manifest.json`.
 - `builds/<capture_id>/`: `offers.json`, `<modality>.csv`, `pareto.html` made from one capture.
 - `latest`: points to the last build that passed validation; a failed build leaves it unchanged.
 - `history.jsonl`: one line per capture, offer, metric and price basis; rebuilding a capture adds no duplicate.
@@ -122,7 +143,10 @@ class Space:
         if not self.config_path.is_file():
             raise ParetoError(f"no config at {self.config_path}; run `init` first", "not_initialised", 2)
         merged = copy.deepcopy(DEFAULT_CONFIG)
-        merged.update(read_json(self.config_path))
+        saved = read_json(self.config_path)
+        merged.update(saved)
+        # A config written by an earlier version lacks the newer routes; they come from the defaults.
+        merged["api"] = {**DEFAULT_CONFIG["api"], **saved.get("api", {})}
         return merged
 
     def new_capture_id(self, moment: dt.datetime) -> str:

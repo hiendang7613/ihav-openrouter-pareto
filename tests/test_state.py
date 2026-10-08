@@ -73,7 +73,7 @@ def test_api_only_build_marks_table_columns_unavailable(tmp_path):
     image = next(m for m in json.loads((space.builds / capture_id / "offers.json").read_text())["report"]["modalities"] if m["id"] == "image")
     weekly = next(m for m in image["metrics"] if m["id"] == "usage.weekly_tokens")
     assert weekly["status"] == "unavailable" and "browser step not run" in weekly["reason"]
-    assert result["views"]["image"]["default"]["metric"].startswith("da.")
+    assert result["views"]["image"]["default"]["metric"] == "arena.checks_passed_pct"
     assert not any(k.startswith("usage.") for k in image["views"])
 
 
@@ -111,9 +111,15 @@ def test_fetch_uses_only_public_urls_and_records_endpoint_failures(tmp_path):
     space.init()
     asked = []
     result = fetch(space, get=lambda url: asked.append(url) or fixture_get(url), delay=0, now=FETCHED_AT)
-    assert asked[0] == DEFAULT_CONFIG["api"]["models_url"] and len(asked) == 1 + 61
-    assert all(u.startswith("https://openrouter.ai/api/v1/images/models/") and u.endswith("/endpoints") for u in asked[1:])
+    assert asked[0] == DEFAULT_CONFIG["api"]["models_url"]
+    kinds = {"https://openrouter.ai/api/v1/images/models/": [], "https://openrouter.ai/api/frontend/v1/arena/explore/models/": [],
+             "https://openrouter.ai/api/frontend/v1/stats/endpoint?": []}
+    for url in asked[1:]:
+        kinds[next(k for k in kinds if url.startswith(k))].append(url)
+    images, arena, stats = kinds.values()
+    assert (len(images), len(arena), len(stats)) == (61, 82, 439) and all(u.endswith("/endpoints") for u in images)
     assert result["endpoints_ok"] == 1 and len(result["endpoints_failed"]) == 60
+    assert result["arena"] == {"ok": 6, "absent": 76, "error": 0, "skipped": 0} and result["stopped"] == {}
     manifest = space.manifest(result["capture_id"])
     assert manifest["api"]["rows"] == 651 and manifest["field_sources"] == DEFAULT_CONFIG["field_sources"]
 

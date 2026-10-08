@@ -23,7 +23,11 @@ INPUT_COMPONENTS, OUTPUT_COMPONENTS = {"input"}, {"output", "image_output", "aud
 TABLE_COLUMN_COMPONENTS = {"Input": INPUT_COMPONENTS, "Output": OUTPUT_COMPONENTS, "Single": INPUT_COMPONENTS | OUTPUT_COMPONENTS}
 TABLE_METRICS = {"Weekly Tokens": "usage.weekly_tokens", "Latency": "perf.latency_s", "Throughput": "perf.throughput_tps"}
 AA_KEYS = ("intelligence_index", "coding_index", "agentic_index")
-SOURCE_ORDER = ("table", "endpoint", "api")
+SOURCE_ORDER = ("table", "endpoint", "api", "arena")
+ARENA_METRIC, LATENCY_METRIC = "arena.checks_passed_pct", "stats.latency_p50_s"
+# The measured Arena cost per task is kept as its own price component and unit, apart from every list price.
+ARENA_COST_COMPONENT, ARENA_COST_UNIT = "arena_task", "per_task_measured"
+LIST_SOURCES = ("table", "endpoint", "api")
 
 
 def variant(model_id: str) -> str:
@@ -118,6 +122,7 @@ def make_offer(row: dict, routers: dict, endpoints: dict | None, capture_id: str
         "table": None,
         "prices": api_prices(row.get("pricing") or {}, capture_id) + (endpoint_prices(endpoints, capture_id) if endpoints else []),
         "metrics": api_metrics(row.get("benchmarks")),
+        "tab_metrics": {},  # per modality: values read for one tab only (Arena tab, latency workload)
     }
 
 
@@ -125,7 +130,93 @@ def table_offer(row: dict, modality: str) -> dict:
     """A Table row with no API match keeps only what the Table showed; no API price is guessed for it."""
     return {"id": row["slug"] or row["name"], "name": row["name"], "variant": variant(row["slug"]), "modalities": [modality],
             "created": None, "context_length": None, "canonical_slug": None, "alias_target": None, "aliases": [],
-            "excluded": None, "match": "unmatched", "table": None, "prices": [], "metrics": {}}
+            "excluded": None, "match": "unmatched", "table": None, "prices": [], "metrics": {}, "tab_metrics": {}}
+
+
+def arena_metric(standing: dict | None, entry: dict) -> dict | None:
+    """Checks passed over checks run in OpenRouter's public Arena, as an exact percentage."""
+    passed, total = (standing or {}).get("checksPassed"), (standing or {}).get("checksTotal")
+    if not all(isinstance(n, int) and not isinstance(n, bool) for n in (passed, total)) or total <= 0 or not 0 <= passed <= total:
+        return None
+    value = Decimal(passed) * 100 / Decimal(total)
+    runs = f", {standing['scoredRun']} scored runs" if isinstance(standing.get("scoredRun"), int) else ""
+    return {"value": value, "raw": f"{passed}/{total}", "display": f"{value.quantize(Decimal('0.1'))}% ({passed}/{total} checks{runs})",
+            "source": f"arena:{entry['modality']}", "checks_total": total, "scored_run": standing.get("scoredRun"),
+            "evals_run": standing.get("evalsRun"), "captured_at": entry["fetched_at"]}
+
+
+def latency_metric(endpoints: list, entry: dict) -> dict | None:
+    """The lowest provider p50 latency of the model page (milliseconds in the answer), in seconds, with the provider and window."""
+    seen = []
+    for endpoint in endpoints:
+        stats = endpoint.get("stats") or {}
+        ms = decimal(stats.get("p50_latency"))
+        if ms is not None and ms >= 0:
+            seen.append((ms, endpoint.get("provider_name") or endpoint.get("provider_slug"), stats))
+    if not seen:
+        return None
+    ms, provider, stats = min(seen, key=lambda s: s[0])
+    value = ms / 1000
+    return {"value": value, "raw": f"{as_text(ms)} ms", "display": f"{format(float(value), '.3g')} s p50, {provider}",
+            "source": f"stats:{entry['modality']}", "provider": provider, "latency_metric": stats.get("latency_metric"),
+            "request_count": stats.get("request_count"), "window_minutes": stats.get("window_minutes"), "captured_at": entry["fetched_at"]}
+
+
+def arena_cost(pages: list, entry: dict, capture_id: str) -> dict | None:
+    """Mean `costUsd` of the model's own scored Arena cells: a measured cost per task with its count, not a list price."""
+    costs = [decimal(cell.get("costUsd")) for page in pages or [] for variant in (page.get("challenge") or {}).get("variants") or []
+             for cell in variant.get("cells") or [] if cell.get("score") and (cell.get("model") or {}).get("permaslug") == entry["permaslug"]]
+    costs = [c for c in costs if c is not None and c >= 0]
+    if not costs:
+        return None
+    mean = sum(costs) / len(costs)
+    price = observation(f"arena:{entry['modality']}", mean, ARENA_COST_COMPONENT, ARENA_COST_UNIT, "arena", capture_id,
+                        raw_label=f"${as_text(mean)} mean of {len(costs)} scored Arena tasks")
+    price["sample_n"] = len(costs)
+    return price
+
+
+def video_prices(endpoints: list, capture_id: str) -> list[dict]:
+    """Every per-second SKU and tier the model page lists, except video-input SKUs (plan bản 4, a different task);
+    other units (per megapixel-second, per M tokens) stay in the capture only."""
+    out = []
+    for endpoint in endpoints:
+        for item in endpoint.get("display_pricing") or []:
+            if item.get("unitLabel") != "/second" or item.get("displayMultiplier", 1) != 1 or "video input" in (item.get("sku_label") or "").lower():
+                continue
+            sku = item.get("sku_label") or "video"
+            labels = [(sku, item.get("price"))] + [(f"{sku} {t.get('sku_label')}", t.get("price")) for t in item.get("tiers") or []]
+            for label, price in labels:
+                out.append(observation(f"stats:{endpoint.get('provider_slug')}:{label}", price, "video_output", "per_second", "endpoint",
+                                       capture_id, raw_label=f"${price}/second, {label}"))
+    return out
+
+
+def attach_page_data(offers: dict, manifest: dict, folder: Path, capture_id: str) -> None:
+    """Arena scores go to every offer of the model; latency and video prices (read for variant=standard) to the standard offer only."""
+    by_permaslug = {}
+    for offer in offers.values():
+        by_permaslug.setdefault(offer["canonical_slug"], []).append(offer)
+    for source in ("arena", "stats"):
+        for entry in manifest.get(source, []):
+            if entry["status"] != "ok":
+                continue
+            data = json.loads((folder / entry["file"]).read_text(encoding="utf-8"), parse_float=Decimal).get("data")
+            if source == "arena":
+                metric = arena_metric((data or {}).get("standing"), entry)
+                targets = by_permaslug.get(entry["permaslug"], [])
+                cost = arena_cost((data or {}).get("pages"), entry, capture_id)
+                for offer in targets if cost else []:
+                    offer["prices"].append(dict(cost))
+            else:
+                metric = latency_metric(data if isinstance(data, list) else [], entry)
+                targets = [o for o in by_permaslug.get(entry["permaslug"], []) if ":" not in o["id"]]
+            for offer in targets:
+                tab = offer["tab_metrics"].setdefault(entry["modality"], {})
+                if metric is not None:
+                    tab[ARENA_METRIC if source == "arena" else LATENCY_METRIC] = metric
+                if source == "stats" and entry["modality"] == "video":
+                    offer["prices"] += video_prices(data if isinstance(data, list) else [], capture_id)
 
 
 def corroborate(price: dict, structured: list[dict]) -> None:
@@ -172,6 +263,7 @@ def load_capture(folder: Path, config: dict) -> dict:
     for offer in offers.values():
         if offer["alias_target"] in offers:
             offers[offer["alias_target"]]["aliases"].append(offer["id"])
+    attach_page_data(offers, manifest, folder, capture_id)
     blocking, warnings, unmatched = [], [], []
     by_name = {}
     for offer in offers.values():
@@ -194,6 +286,12 @@ def load_capture(folder: Path, config: dict) -> dict:
                 unmatched.append({"table": modality, "slug": row["slug"], "name": row["name"]})
             elif target["table"] is None:
                 attach_table(target, row, modality, entry, capture_id)
+    for source in ("arena", "stats"):
+        entries = manifest.get(source, [])
+        skipped = sum(e["status"] == "skipped" for e in entries)
+        if skipped:
+            cause = next((e["error"] for e in entries if e["status"] == "error" and e.get("http_status") in (401, 403, 429)), "a stop status")
+            warnings.append(f"{source} route stopped ({cause}); {skipped} models were not requested and have no {source} data")
     for offer in offers.values():
         if offer["excluded"] and offer["excluded"]["detail"].startswith("price -1 sentinel"):
             warnings.append(f"{offer['id']} has price -1 but is not in the router list; excluded as a router")

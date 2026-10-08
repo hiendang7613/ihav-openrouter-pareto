@@ -27,7 +27,8 @@ def parser() -> argparse.ArgumentParser:
     root = _Parser(prog="ihav-openrouter-pareto", description="OpenRouter quality or usage vs price, with Pareto frontiers.")
     commands = root.add_subparsers(dest="command", required=True, parser_class=_Parser)
     commands.add_parser("init", parents=[common], help="create .ihav_space/ihav-openrouter-pareto with a default config; never overwrites")
-    commands.add_parser("fetch", parents=[common], help="public, key-free GETs of the catalog and typed endpoint prices into a new capture")
+    get = commands.add_parser("fetch", parents=[common], help="public, key-free GETs of the catalog, typed endpoint prices and model-page data into a new capture")
+    get.add_argument("--no-latency", action="store_true", help="skip the model-page latency route (one GET per model)")
     step = commands.add_parser("ingest", parents=[common], help="store Table text read by the skill's browser step")
     step.add_argument("--capture", help="capture id or YYYY-MM-DD (default: newest)")
     step.add_argument("--modality", required=True, help="text, image, speech, another configured modality, or all")
@@ -50,7 +51,7 @@ def run(args: argparse.Namespace) -> tuple[dict, int]:
     if args.command == "init":
         return {"space": str(space.root), "created": space.init()}, 0
     if args.command == "fetch":
-        return fetch(space), 0
+        return fetch(space, latency=not args.no_latency), 0
     if args.command == "ingest":
         columns = [c.strip() for c in args.columns.split("|")] if args.columns else None
         result = ingest(space, args.capture, args.modality, args.file, args.url, args.expected_rows, args.view, args.captured_at, columns)

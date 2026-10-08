@@ -6,9 +6,10 @@ __version__ = "0.1.0"
 
 
 class ParetoError(Exception):
-    """A user-facing failure; `code` becomes the JSON error code and `exit_code` the process status."""
+    """A user-facing failure; `code` becomes the JSON error code, `exit_code` the process status, `status` the HTTP status if any."""
 
-    def __init__(self, message: str, code: str = "error", exit_code: int = 1):
+    def __init__(self, message: str, code: str = "error", exit_code: int = 1, status: int | None = None):
         super().__init__(message)
         self.code = code
         self.exit_code = exit_code
+        self.status = status

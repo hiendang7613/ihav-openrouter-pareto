@@ -8,12 +8,15 @@ import json
 import re
 from pathlib import Path
 
+from .normalize import ARENA_COST_COMPONENT, ARENA_COST_UNIT, LATENCY_METRIC
 from .space import as_text
 
 ASSETS = Path(__file__).with_name("assets")
 CSV_COLUMNS = ["capture_id", "modality", "metric", "metric_label", "price_component", "price_unit", "offer_id", "offer_name", "variant",
                "price", "price_display", "price_raw_label", "price_column", "price_qualifier", "discount_pct", "price_source",
-               "lower_bound", "free_offer", "free_component", "score", "score_display"] + [f"frontier_{s}" for s in ("all", "standard", "batch", "free")]
+               "lower_bound", "free_offer", "free_component", "score", "score_display", "latency_s", "latency_display",
+               "table_latency_s", "arena_cost_per_task_usd", "arena_cost_n"] + [f"frontier_{s}" for s in ("all", "standard", "batch", "free")]
+ARENA_COST_BASIS = f"{ARENA_COST_COMPONENT}|{ARENA_COST_UNIT}"
 FORMULA_START = ("=", "+", "-", "@", "\t", "\r")
 NUMBER = re.compile(r"-?\d+(\.\d+)?([eE][-+]?\d+)?")
 
@@ -53,10 +56,12 @@ def csv_rows(report: dict, modality: dict):
             for i in modality["views"][f"{key}|all"]["valid"]:
                 offer = modality["offers"][i]
                 price, score = offer["p"][basis["id"]], offer["m"][metric["id"]]
+                latency, table_latency = offer["m"].get(LATENCY_METRIC, {}), offer["m"].get("perf.latency_s", {})
+                cost = offer["p"].get(ARENA_COST_BASIS, {})
                 flags = ["yes" if i in fronts[s] else ("no" if s in ("all", offer["variant"]) else "") for s in ("all", "standard", "batch", "free")]
                 yield [report["capture_id"], modality["id"], metric["id"], metric["label"], basis["component"], basis["unit"], offer["id"], offer["name"],
                        offer["variant"], price["v"], price["d"], price["raw"], price["col"], price["q"], price["dp"], price["s"],
-                       price["lb"], offer["free"], price["fc"], score["v"], score["d"]] + flags
+                       price["lb"], offer["free"], price["fc"], score["v"], score["d"], latency.get("v"), latency.get("d"), table_latency.get("v"), cost.get("v"), cost.get("n")] + flags
 
 
 def write_csv(path: Path, report: dict, modality: dict) -> int:
