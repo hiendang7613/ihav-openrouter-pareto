@@ -9,6 +9,7 @@
 - Chart latency against price in every tab (plan bản 4): metrics record `better: higher | lower`, and a lower-is-better frontier is the minimum price and minimum latency. Decisions defaults to "Latency vs price".
 - Add the measured Arena cost per task (mean `costUsd` of the model's scored tasks, with n) as a column, a hover line, CSV columns (`arena_cost_per_task_usd`, `arena_cost_n`) and a selectable x axis labelled "measured, not a list price"; it is never a default and never makes an offer paid or free.
 - Leave video-input SKUs out of the video per-second "from" price, and read Arena and stats answers as exact Decimals.
+- `diff` reports the measured Arena cost per task under its own key, `measured_cost_changes`, apart from `price_changes`.
 
 ## 0.1.0 — 2026-10-08
 

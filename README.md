@@ -33,7 +33,7 @@ Restart the host, then type `/ihav-openrouter-pareto` in Claude Code, or ask Cod
 | `run` (default) | `init`, `fetch`, the browser Table step for each modality, `build`, then gives the HTML path |
 | `capture` | `init`, `fetch` and the Table step, without a build |
 | `build [capture_id]` | builds the given capture, or the newest one |
-| `diff <a> <b>` | price and metric changes, new and removed offers between two captures |
+| `diff <a> <b>` | price and metric changes, new and removed offers between two captures; measured Arena cost changes apart, under `measured_cost_changes` |
 
 The skill owns the browser step: it opens `https://openrouter.ai/models?order=top-weekly&output_modalities=<m>`, switches to the Table view, reads the rows and hands the text to `ingest` ([contract](plugins/ihav-openrouter-pareto/core/ihav-openrouter-pareto/references/table-capture.md)). Without a browser tool, `build` still runs from the API and model-page data and marks the Table's Weekly Tokens, Latency and Throughput `unavailable`.
 

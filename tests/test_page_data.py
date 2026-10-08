@@ -10,9 +10,10 @@ from decimal import Decimal
 
 import pytest
 
-from fixture_build import PAGE_FIXTURES, fixture_get, make_capture
+from fixture_build import FETCHED_AT, PAGE_FIXTURES, PAGE_URLS, fixture_get, make_capture
 from ihav_openrouter_pareto import ParetoError
 from ihav_openrouter_pareto.build import build
+from ihav_openrouter_pareto.diff import diff
 from ihav_openrouter_pareto.fetch import fetch
 from ihav_openrouter_pareto.normalize import ARENA_METRIC, LATENCY_METRIC, load_capture, observation, select_price
 from ihav_openrouter_pareto.report import LOWER_BETTER_NOTE, MEASURED_NOTE, offer_entry
@@ -163,3 +164,19 @@ def test_decisions_default_to_latency_vs_price_with_the_lowest_latency_frontier(
     assert LOWER_BETTER_NOTE in view["notes"]
     span, d1 = (Decimal(entry(decisions, i)["m"][LATENCY_METRIC]["v"]) for i in ("respan/span-01-lite", "liquid/d1"))
     assert d1 < span  # the dearer offer is on the frontier only because it is faster
+
+
+def test_diff_reports_the_measured_cost_apart_from_list_prices(tmp_path):
+    space, a = make_capture(tmp_path, tables={})
+    url = next(u for u, e in PAGE_URLS.items() if (e.get("file") or "").startswith("arena_image_bytedance-seed"))
+    doc = json.loads((PAGE_FIXTURES / PAGE_URLS[url]["file"]).read_text(encoding="utf-8"))
+    for page in doc["data"]["pages"]:
+        for variant in page["challenge"]["variants"]:
+            for cell in variant["cells"]:
+                cell["costUsd"] = 0.05
+    changed = json.dumps(doc).encode()
+    b = fetch(space, get=lambda u: changed if u == url else fixture_get(u), delay=0, now=FETCHED_AT.replace(hour=9))["capture_id"]
+    result = diff(space, a, b)
+    assert result["measured_cost_changes"] == [{"offer": "bytedance-seed/seedream-4.5", "measured_basis": "arena_task|per_task_measured|arena|arena:image",
+                                                "a": "0.04", "b": "0.05"}]
+    assert result["price_changes"] == [] and result["not_comparable"] == []

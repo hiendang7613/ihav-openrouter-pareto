@@ -20,7 +20,7 @@ The user's request selects the subcommand; no subcommand means `run`.
 - `run`: `init`, then `fetch`, then the Table step for each modality in `config.json`, then `build`. Give the user the `html` path from the build result and open it if they ask.
 - `capture`: `init`, `fetch` and the Table step, without `build`.
 - `build [capture_id]`: `build --capture <capture_id>`, or the newest capture when no id is given.
-- `diff <a> <b>`: `diff <a> <b>` with two capture ids, or dates that name exactly one capture each. Items under `not_comparable` have a different metric identity or price basis; never compare them.
+- `diff <a> <b>`: `diff <a> <b>` with two capture ids, or dates that name exactly one capture each. Items under `not_comparable` have a different metric identity or price basis; never compare them. Items under `measured_cost_changes` are changes of the measured Arena cost per task; never report them as price changes.
 
 ## Table step
 
