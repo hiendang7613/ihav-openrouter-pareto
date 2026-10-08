@@ -54,9 +54,11 @@ Exit codes: `0` success, `2` usage or missing state, `3` incomplete Table or bui
 One command without an LLM or a browser, from a checkout (tabs: text, image, video, speech, decisions; `--modalities` changes them):
 
 ```bash
+python3 scripts/charts.py --offline   # seconds, no network: the saved 2026-10-07 answers and Tables, 2026-10-08 model-page answers
 python3 scripts/charts.py             # live: init, enable the tabs in config.json, fetch, build
-python3 scripts/charts.py --offline   # no network: the saved 2026-10-07 answers and Tables, 2026-10-08 model-page answers
 ```
+
+Each run prints a short summary (each tab's valid / total offers and default view, then the page path) and opens the page in the default browser. `--json` prints the full result as one JSON object instead, `--no-open` leaves the browser alone, and `--project <folder>` puts the state somewhere other than the current folder.
 
 A live run on 2026-10-08 made 675 public GETs (catalog 1, image endpoints 61, Arena 121, latency 492) in 9 min 26 s and prints its progress on stderr; `--no-latency` drops the latency requests. It has no Table, so Weekly Tokens and the Table's Latency and Throughput are `unavailable`. Image, video and speech chart "Checks passed vs price"; text charts the Intelligence Index; decisions has no public quality metric, so it charts "Latency vs price" (speed, not quality).
 

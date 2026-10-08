@@ -18,7 +18,7 @@ def test_offline_run_builds_five_tabs_and_keeps_set_config(tmp_path, capsys):
     config = json.loads(space.config_path.read_text(encoding="utf-8"))
     config["price_components"]["speech"] = ["input"]
     space.config_path.write_text(json.dumps(config), encoding="utf-8")
-    code = charts.main(["--offline", "--project", str(tmp_path)])
+    code = charts.main(["--offline", "--project", str(tmp_path), "--json", "--no-open"])
     out = json.loads(capsys.readouterr().out)
     assert code == 0 and out["validated"] and out["mode"] == "offline"
     assert list(out["tabs"]) == ["text", "image", "video", "speech", "decisions"]
@@ -40,7 +40,18 @@ def test_failed_fetch_is_one_json_error(tmp_path, capsys, monkeypatch):
         raise charts.ParetoError("network error for https://openrouter.ai/api/v1/models", "network_error", 4)
 
     monkeypatch.setattr(charts, "fetch", offline)
-    code = charts.main(["--project", str(tmp_path), "--modalities", "text,decisions"])
+    code = charts.main(["--project", str(tmp_path), "--modalities", "text,decisions", "--json"])
     out = json.loads(capsys.readouterr().out)
     assert code == 4 and out["error"]["code"] == "network_error"
     assert json.loads(charts.Space(tmp_path).config_path.read_text(encoding="utf-8"))["modalities"] == ["text", "decisions"]
+
+
+def test_default_run_prints_a_short_summary_and_opens_the_page(tmp_path, capsys, monkeypatch):
+    opened = []
+    monkeypatch.setattr(charts.webbrowser, "open", opened.append)
+    code = charts.main(["--offline", "--project", str(tmp_path)])
+    lines = capsys.readouterr().out.splitlines()
+    assert code == 0 and lines[0] == "offline capture 20261007T053600Z: validated"
+    assert "  decisions     2/14   stats.latency_p50_s vs input|per_m_tokens" in lines
+    html = (tmp_path / ".ihav_space/ihav-openrouter-pareto/builds/20261007T053600Z/pareto.html").resolve()
+    assert lines[-1] == f"html: {html}" and opened == [html.as_uri()]
