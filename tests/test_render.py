@@ -66,7 +66,7 @@ def test_one_tab_per_default_modality_with_selectors(report):
         assert m["scopes"] == ["all", "standard", "batch", "free"] and m["default"]["scope"] == "all"
         assert f"{m['default']['metric']}|{m['default']['basis']}|all" in m["views"]
     defaults = {m["id"]: m["default"]["metric"] for m in modalities}
-    assert defaults == {"text": "aa.intelligence_index", "image": "usage.weekly_tokens", "speech": "usage.weekly_tokens"}
+    assert defaults == {"text": "aa.intelligence_index", "image": "arena.checks_passed_pct", "speech": "arena.checks_passed_pct"}
     weekly = next(x for x in modalities[1]["metrics"] if x["id"] == "usage.weekly_tokens")
     assert weekly["title"] == "Weekly usage vs price"
 

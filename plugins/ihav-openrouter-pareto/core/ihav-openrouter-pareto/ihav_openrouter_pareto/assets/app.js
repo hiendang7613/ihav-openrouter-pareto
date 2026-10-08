@@ -4,6 +4,7 @@
   var DATA = JSON.parse(document.getElementById('report-data').textContent);
   var NS = 'http://www.w3.org/2000/svg';
   var ORIGIN = 'https://openrouter.ai/';
+  var LATENCY = 'stats.latency_p50_s', TABLE_LATENCY = 'perf.latency_s';
   var W = 960, H = 540, M = { l: 72, r: 24, t: 16, b: 56 }, ZERO_BAND = 48;
   var state = { mod: null, metric: null, basis: null, scope: null };
 
@@ -23,6 +24,14 @@
   function clear(e) { while (e.firstChild) e.removeChild(e.firstChild); }
   function byId(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
   function clip(s, n) { var a = Array.from(s); return a.length > n ? a.slice(0, n - 1).join('') + '…' : s; }
+  // Latency is never an axis (lower is better); both sources are shown, each with its own label.
+  function latency(o) {
+    var parts = [];
+    if (o.m[LATENCY]) parts.push(o.m[LATENCY].d + ' (model page)');
+    if (o.m[TABLE_LATENCY]) parts.push(o.m[TABLE_LATENCY].d + ' (Table)');
+    return parts.join('; ');
+  }
+  function counts(c) { return Object.keys(c || {}).map(function (k) { return c[k] + ' ' + k; }).join(', ') || 'none'; }
   function modelHref(id) { return ORIGIN + id.split('/').map(encodeURIComponent).join('/'); }
   function compact(v) {
     var units = [[1e12, 'T'], [1e9, 'B'], [1e6, 'M'], [1e3, 'K']];
@@ -52,7 +61,8 @@
   function header() {
     $('meta').textContent = 'Capture ' + DATA.capture_id + ' (captured ' + DATA.captured_at + ', built ' + DATA.generated_at + ', plugin ' + DATA.version + '). Tables: ' +
       (Object.keys(DATA.tables).map(function (m) { var t = DATA.tables[m]; return m + ' ' + t.rows_read + '/' + t.expected_rows + ' rows at ' + t.captured_at; }).join('; ') || 'none (API-only)') +
-      '. Typed endpoint prices: ' + DATA.endpoints.ok + ' ok, ' + DATA.endpoints.failed + ' failed.';
+      '. Typed endpoint prices: ' + DATA.endpoints.ok + ' ok, ' + DATA.endpoints.failed + ' failed. Arena: ' + counts(DATA.arena) +
+      '. Model-page latency: ' + counts(DATA.stats) + '.';
     DATA.blocking.concat(DATA.warnings).forEach(function (w) { $('alerts').appendChild(el('li', w)); });
     DATA.notes.forEach(function (n) { $('global-notes').appendChild(el('li', n)); });
     DATA.modalities.forEach(function (mod, i) {
@@ -185,6 +195,7 @@
       if (p.o.free) div.appendChild(el('div', 'Free offer: every price is 0'));
       else if (p.p.fc) div.appendChild(el('div', 'This price is 0; other prices of the offer are not'));
       div.appendChild(el('div', metric.label + ': ' + p.m.d));
+      if (latency(p.o)) div.appendChild(el('div', 'Latency: ' + latency(p.o)));
       box.appendChild(div);
     });
     box.hidden = false;
@@ -208,6 +219,7 @@
       tr.appendChild(el('td', p.o.variant + (p.o.free ? ', free' : '')));
       tr.appendChild(el('td', p.p.d + (p.p.lb ? ' (lower bound)' : '') + (p.p.fc ? ' (0 in a paid offer)' : ''), 'num'));
       tr.appendChild(el('td', p.m.d, 'num'));
+      tr.appendChild(el('td', latency(p.o), 'num'));
       tr.appendChild(el('td', front[p.i] ? 'frontier' : ''));
       tr.appendChild(el('td', p.p.s + ' · ' + p.p.col));
       body.appendChild(tr);

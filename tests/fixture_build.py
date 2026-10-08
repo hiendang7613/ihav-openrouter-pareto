@@ -1,4 +1,4 @@
-"""Replay the saved 2026-10-07 public answers and Table captures as one capture, offline, then build it.
+"""Replay the saved 2026-10-07 public answers and Table captures, plus the 2026-10-08 model-page answers, as one capture, offline.
 
 Run `python tests/fixture_build.py [project-folder]` to produce pareto.html, CSV and JSON from the fixtures.
 """
@@ -13,6 +13,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "plugins/ihav-openrouter-pareto/core/ihav-openrouter-pareto"
 FIXTURES = ROOT / "tests/fixtures/openrouter_2026-10-07"
+# Arena and endpoint-stats answers of 2026-10-08 for a few models of the 2026-10-07 catalog, by URL (README there).
+PAGE_FIXTURES = ROOT / "tests/fixtures/openrouter_2026-10-08"
+PAGE_URLS = json.loads((PAGE_FIXTURES / "urls.json").read_text(encoding="utf-8"))
 sys.path.insert(0, str(CORE))
 
 from ihav_openrouter_pareto import ParetoError  # noqa: E402
@@ -35,18 +38,22 @@ TABLES = {
 
 
 def fixture_get(url: str) -> bytes:
-    """Stand-in for the network: the saved catalog and the one saved endpoint answer; anything else is a 404."""
+    """Stand-in for the network: the saved catalog, endpoint and model-page answers; anything else is a 404."""
     if url == DEFAULT_CONFIG["api"]["models_url"]:
         return (FIXTURES / "models_all.json").read_bytes()
     if url == SEEDREAM_URL:
         return (FIXTURES / "seedream_endpoints.json").read_bytes()
-    raise ParetoError(f"HTTP 404 from {url}", "http_error", 4)
+    saved = PAGE_URLS.get(url, {})
+    if saved.get("file"):
+        return (PAGE_FIXTURES / saved["file"]).read_bytes()
+    status = saved.get("status") or 404
+    raise ParetoError(f"HTTP {status} from {url}", "http_error", 4, status=status)
 
 
-def make_capture(project: Path, tables: dict = TABLES, now: dt.datetime = FETCHED_AT) -> tuple[Space, str]:
+def make_capture(project: Path, tables: dict = TABLES, now: dt.datetime = FETCHED_AT, latency: bool = True) -> tuple[Space, str]:
     space = Space(project)
     space.init()
-    capture_id = fetch(space, get=fixture_get, delay=0, now=now)["capture_id"]
+    capture_id = fetch(space, get=fixture_get, delay=0, now=now, latency=latency)["capture_id"]
     for modality, (name, expected, url, read_at, columns) in tables.items():
         ingest(space, capture_id, modality, FIXTURES / name, url, expected, "table", read_at, columns)
     return space, capture_id

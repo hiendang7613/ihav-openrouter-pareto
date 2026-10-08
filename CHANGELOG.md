@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add `scripts/charts.py`: one command, no LLM and no browser, with tabs for text, image, video, speech and decisions; `--offline` replays the fixtures.
+- Fetch two public routes of the model page per model (plan bản 3): Arena "Checks passed" (`arena.checks_passed_pct`, image, video and speech) and p50 latency per provider (`stats.latency_p50_s`, with the page's workload and latency metric per modality). An Arena 404 is recorded as `absent`; an HTTP 401, 403 or 429 stops that route and the build runs with what arrived. `fetch --no-latency` skips the latency route.
+- Chart video against the model page's per-second list prices (the lowest SKU or tier as a "from" lower bound); catalog video prices are `0`.
+- Default image, video and speech charts are "Checks passed vs price"; latency is a table column, a hover line and CSV columns (`latency_s`, `latency_display`, `table_latency_s`), never an axis.
+
 ## 0.1.0 — 2026-10-08
 
 - Add `init`, `fetch`, `ingest`, `build` and `diff` as one standard-library CLI with JSON output, and one `/ihav-openrouter-pareto` skill (`run | capture | build | diff`) for Claude Code and Codex.

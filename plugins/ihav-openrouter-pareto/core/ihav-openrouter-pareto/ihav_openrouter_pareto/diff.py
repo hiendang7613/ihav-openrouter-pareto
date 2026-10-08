@@ -11,7 +11,9 @@ def _prices(offer: dict) -> dict:
 
 
 def _metrics(offer: dict) -> dict:
-    return {k: v["value"] for k, v in offer["metrics"].items()}
+    """Catalog and Table metrics by id; per-tab metrics (Arena, latency) as `<modality>:<id>`."""
+    tabs = {f"{tab}:{k}": v["value"] for tab, values in offer.get("tab_metrics", {}).items() for k, v in values.items()}
+    return {**{k: v["value"] for k, v in offer["metrics"].items()}, **tabs}
 
 
 def _compare(kind: str, offer_id: str, a: dict, b: dict, changes: list, refused: list) -> None:

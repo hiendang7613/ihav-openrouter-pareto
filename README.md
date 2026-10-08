@@ -4,7 +4,7 @@ OpenRouter models as quality or weekly usage versus list price, with a Pareto fr
 
 One build gives one self-contained HTML page (no CDN, no outbound request) with a tab per output modality (text, image, speech), plus a CSV per modality and one JSON file, all from the same observations and frontiers.
 
-Status: 0.1.0, unreleased. Plan approved 2026-10-07 13:21 (ai-image_tools/ai-image-studio/labs/plans/openrouter_pareto_plugin_plan.md, bản 2, SHA-256 `698866c5…`). Not yet published to the ihav catalog.
+Status: 0.1.0, unreleased. Plan approved 2026-10-07 13:21 (ai-image_tools/ai-image-studio/labs/plans/openrouter_pareto_plugin_plan.md, bản 2, SHA-256 `698866c5…`); its bản 3 delta (`openrouter_pareto_plan_v3_delta.md`, SHA-256 `e76d39fd…`: Arena "Checks passed", model-page latency, video prices per second) approved 2026-10-08 11:42. Not yet published to the ihav catalog.
 
 ## Install
 
@@ -35,14 +35,14 @@ Restart the host, then type `/ihav-openrouter-pareto` in Claude Code, or ask Cod
 | `build [capture_id]` | builds the given capture, or the newest one |
 | `diff <a> <b>` | price and metric changes, new and removed offers between two captures |
 
-The skill owns the browser step: it opens `https://openrouter.ai/models?order=top-weekly&output_modalities=<m>`, switches to the Table view, reads the rows and hands the text to `ingest` ([contract](plugins/ihav-openrouter-pareto/core/ihav-openrouter-pareto/references/table-capture.md)). Without a browser tool, `build` still runs from the API alone and marks Weekly Tokens, Latency and Throughput `unavailable`.
+The skill owns the browser step: it opens `https://openrouter.ai/models?order=top-weekly&output_modalities=<m>`, switches to the Table view, reads the rows and hands the text to `ingest` ([contract](plugins/ihav-openrouter-pareto/core/ihav-openrouter-pareto/references/table-capture.md)). Without a browser tool, `build` still runs from the API and model-page data and marks the Table's Weekly Tokens, Latency and Throughput `unavailable`.
 
 The same commands work from a terminal; each prints one JSON object:
 
 ```bash
 CLI=plugins/ihav-openrouter-pareto/core/ihav-openrouter-pareto/scripts/pareto.py
 python3 $CLI init --project .
-python3 $CLI fetch --project .
+python3 $CLI fetch --project .            # --no-latency skips the model-page latency route
 python3 $CLI ingest --project . --modality image --file table_image.txt \
   --url "https://openrouter.ai/models?order=top-weekly&output_modalities=image" --expected-rows 59
 python3 $CLI build --project .
@@ -55,29 +55,31 @@ One command without an LLM or a browser, from a checkout (tabs: text, image, vid
 
 ```bash
 python3 scripts/charts.py             # live: init, enable the tabs in config.json, fetch, build
-python3 scripts/charts.py --offline   # no network: the saved 2026-10-07 answers and Table captures
+python3 scripts/charts.py --offline   # no network: the saved 2026-10-07 answers and Tables, 2026-10-08 model-page answers
 ```
 
-A live run has no Table, so Weekly Tokens, Latency and Throughput are `unavailable`; the video and decisions tabs have no API metric and show "no chart". With the 2026-10-07 Tables, decisions charts weekly usage; video still has none, because its Weekly Tokens are `—` and its catalog prices are `0`.
+A live run on 2026-10-08 made 675 public GETs (catalog 1, image endpoints 61, Arena 121, latency 492) in 9 min 26 s and prints its progress on stderr; `--no-latency` drops the latency requests. It has no Table, so Weekly Tokens and the Table's Latency and Throughput are `unavailable`. Image, video and speech chart "Checks passed vs price"; text charts the Intelligence Index; decisions has no public quality metric, so its tab shows "no chart" (with the 2026-10-07 Tables it charts weekly usage).
 
 ## What the page shows
 
-- A tab per modality in `config.json` (default text, image, speech).
+- A tab per modality in `config.json` (default text, image, speech; `scripts/charts.py` adds video and decisions).
 - A selector of one metric, one price component with its unit, and one offer scope (`all`, `standard`, `batch`, `free`). Every part of the view follows that one selection: points, axes, the "n valid / N total" count, the reasons for exclusion, the frontier, hover and the table.
-- Default views: text uses the Artificial Analysis Intelligence Index; image and speech use "Weekly usage vs price". The default price is the component and unit with the most valid offers for that metric.
+- Default views: text uses the Artificial Analysis Intelligence Index; image, video and speech use "Checks passed vs price"; decisions uses "Weekly usage vs price". The default price is the component and unit with the most valid offers for that metric.
+- The table has a Latency column (model-page p50 and, with a Table, the Table's latency, each labelled with its source); hover shows it too.
 - The x axis is a log scale of positive prices; price 0 sits in its own band on the left. The step line is the best score observed at a price up to that point; it does not stand for an intermediate model.
 - Symbols: a circle is an exact price, a diamond a "from" price (a lower bound), a square a free offer, a hollow mark a 0 price inside a paid offer. Colours mark standard, batch and `:free` offers.
 
 ## Data rules
 
-- **Sources.** Only OpenRouter. The public catalog (`/api/v1/models?output_modalities=all`) gives ids, names, prices and benchmarks; `/api/v1/images/models/<id>/endpoints` gives typed per-image or per-megapixel prices; the models Table gives Weekly Tokens, Latency, Throughput and the displayed price labels. `config.json` and each capture manifest record which field comes from which source.
+- **Sources.** Only OpenRouter. The public catalog (`/api/v1/models?output_modalities=all`) gives ids, names, prices and benchmarks; `/api/v1/images/models/<id>/endpoints` gives typed per-image or per-megapixel prices; the models Table gives Weekly Tokens, Latency, Throughput and the displayed price labels. Two public routes that the model page reads, keyed by the catalog's `canonical_slug` (permaslug), give the rest: `/api/frontend/v1/arena/explore/models/<permaslug>?tab=<image|video|speech>` ("Checks passed") and `/api/frontend/v1/stats/endpoint?permaslug=…&perfWorkload=…&latencyMetric=…` (p50 latency per provider and the video list prices). `config.json` and each capture manifest record which field comes from which source. An Arena 404 means "no public Arena result" and is recorded as `absent`; an HTTP 401, 403 or 429 stops that route for the rest of the fetch, and the build runs with what arrived.
 - **Identity.** An offer is the verbatim API id, so `:batch` and `:free` offers stay separate. A Table row joins by its model link (the exact id), else by a unique full display name; otherwise it stays `unmatched` and gets no API price.
 - **Prices.** Every price is kept as an observation: column, raw label, exact Decimal value, unit, component, qualifier (`exact`, `from`, `discounted`), discount, source and capture id. Catalog prices are USD per token and are shown per 1M tokens (an exact decimal shift). `-1` is a router sentinel, never a price. `0` is a valid price. Values are compared exactly; rounding happens only on display.
 - **Table price units.** The Table text carries no unit. A label takes the unit of the one API or endpoint price of the same offer with an equal value; otherwise its unit is `unknown` and it is not plotted. A displayed discount is recorded and never applied again.
 - **One price per chart.** A chart uses one component and one unit. Units are never converted. For one offer, a Table label confirmed this way is preferred, then a typed endpoint price, then the catalog price.
-- **Metrics.** `aa.intelligence_index`, `aa.coding_index`, `aa.agentic_index`, `da.<arena>/<category>.elo` (one identity per arena and category; ELO is never merged across categories), `usage.weekly_tokens`, `perf.throughput_tps` and `perf.latency_s`. A missing score is not plotted and never counts as 0. Weekly tokens measure usage, not quality. Latency is shown in hover and the table, not as a chart axis, because lower is better and the frontier rule maximises the score.
+- **Metrics.** `aa.intelligence_index`, `aa.coding_index`, `aa.agentic_index`, `da.<arena>/<category>.elo` (one identity per arena and category; ELO is never merged across categories), `usage.weekly_tokens`, `perf.throughput_tps`, `perf.latency_s`, `arena.checks_passed_pct` (Arena `checksPassed / checksTotal × 100`, image, video and speech; 0 checks run gives no score) and `stats.latency_p50_s` (the lowest provider p50 over the 30 minutes before the fetch; time to first token for text, generation time for image and video, full response for speech and decisions). A missing score is not plotted and never counts as 0. Weekly tokens measure usage, not quality. An Arena score rates the model, so every offer of that model gets it; model-page latency is read for `variant=standard`, so only the offer without a `:` suffix gets it. Latency is a table column and a hover line, not a chart axis, because lower is better and the frontier rule maximises the score.
 - **Exclusions.** Routers by exact id (the seven `-1` rows of 2026-10-07, listed in `config.json`), any other `-1` row, and `~…-latest` aliases (shown as aliases of their target). `relace/relace-apply-3` and `relace/relace-search` are models and stay. Raw rows always stay in the capture.
 - **Long-context tiers** (`pricing.overrides`) stay in the raw capture; charts use the base price.
+- **Video prices.** Catalog token prices of video models are `0`, so video uses the model page's per-second list prices (`video_output · USD per second`). Each SKU and resolution tier is an observation; the lowest is shown as a "from" lower bound. Other units (per megapixel-second, per 1M tokens) stay in the capture and are not plotted.
 - **Speech units.** The catalog reports speech prices in its per-token fields; the page shows the unit the API states. A provider may bill characters or seconds instead.
 
 ## State
@@ -85,7 +87,8 @@ A live run has no Table, so Weekly Tokens, Latency and Throughput are `unavailab
 ```
 ./.ihav_space/ihav-openrouter-pareto/
   README.md  config.json
-  captures/<capture_id>/   manifest.json, api_all.json, endpoints_<id>.json, table_<modality>.txt
+  captures/<capture_id>/   manifest.json, api_all.json, endpoints_<id>.json, arena_<modality>_<permaslug>.json,
+                           stats_<modality>_<permaslug>.json, table_<modality>.txt
   builds/<capture_id>/     offers.json, <modality>.csv, pareto.html
   latest -> builds/<capture_id>   moved only after a validated build (a one-line text file where symlinks are not allowed)
   history.jsonl            one line per capture, offer, metric and price basis; rebuilding adds no duplicate
@@ -95,7 +98,7 @@ A capture id is the UTC second of the fetch (`20261007T053600Z`); a second captu
 
 ## CSV and JSON
 
-CSV files are written with Python's `csv.writer`, one row per valid offer per (metric, price) view, with frontier flags for each scope. A text cell that starts with `=`, `+`, `-`, `@`, a tab or a carriage return gets a leading `'` so spreadsheets do not run it as a formula; numbers are written unchanged. `offers.json` keeps every raw label and source string.
+CSV files are written with Python's `csv.writer`, one row per valid offer per (metric, price) view, with frontier flags for each scope and the offer's latency (`latency_s`, `latency_display`, `table_latency_s`). A text cell that starts with `=`, `+`, `-`, `@`, a tab or a carriage return gets a leading `'` so spreadsheets do not run it as a formula; numbers are written unchanged. `offers.json` keeps every raw label and source string.
 
 ## Known limits
 
@@ -103,6 +106,8 @@ CSV files are written with Python's `csv.writer`, one row per valid offer per (m
 - Table values move within minutes; every Table capture keeps its own read time.
 - Whether a visitor who is not logged in sees every Table column is not yet known: the 2026-10-07 fixtures were read in the admin's Chrome, and whether that session was logged in was not checked.
 - Per-image prices need the typed endpoint answers; with the saved fixtures only `bytedance-seed/seedream-4.5` has one.
+- The two model-page routes are not documented API; OpenRouter may change or rate-limit them without notice. Arena covers only part of each modality: of 13 image, video and speech models sampled on 2026-10-08, 7 had a score, 4 answered 404 and 2 had 0 checks run.
+- Model-page latency covers the 30 minutes before the fetch; a model with no recent request has none.
 
 ## Development
 
@@ -111,7 +116,7 @@ python3 -m pytest                # offline; sockets are blocked in tests
 python3 tests/fixture_build.py   # builds .ihav_space/ihav-openrouter-pareto/ here from the saved fixtures
 ```
 
-`tests/fixtures/openrouter_2026-10-07/` holds the real public answers and Table captures of 2026-10-07 with their `SHA256SUMS`.
+`tests/fixtures/openrouter_2026-10-07/` holds the real public answers and Table captures of 2026-10-07 with their `SHA256SUMS`; `tests/fixtures/openrouter_2026-10-08/` holds real model-page answers (Arena and latency) of 2026-10-08 for 16 models (18 offers) of that catalog.
 
 ## License
 
